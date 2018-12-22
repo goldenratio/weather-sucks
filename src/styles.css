@@ -128,3 +128,19 @@ body {
     font-size: 4rem;
   }
 }
+
+@media screen and (max-height: 350px) {
+  .temperature .weather-digit {
+    font-size: 3em;
+  }
+
+  .temperature .icon {
+    font-size: 2em;
+    margin-right: 1.2em;
+  }
+
+  .does-it-suck {
+    transform: translate(-50%, 0%);
+    font-size: 3rem;
+  }
+}
