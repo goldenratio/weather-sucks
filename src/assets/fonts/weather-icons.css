@@ -1,0 +1,5 @@
+@font-face {
+  font-family: 'weathericons';
+  src:  url('./weathericons-regular-webfont.woff2') format('woff2'),
+  url('./weathericons-regular-webfont.woff') format('woff');
+}

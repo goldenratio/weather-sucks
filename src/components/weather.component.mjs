@@ -13,11 +13,13 @@ export const CityHeader = ({ value }) => html`<div class="city-title">${value}</
 export const Temperature = ({ value, unit, icon }) => {
   return html`
     <div class="temperature">
-      <div class="icon__${icon}"></div>
-      <div>${value}<sup>°</sup> ${unit}</div>
+      <div class="weather-digit">${value}<sup><span class="sup">° ${unit}</span></sup></div>
+      <div class="icon"><div class="${icon}"></div></div>
     </div>
   `;
 };
+
+export const Background = () => html`<div class="background"></div>`;
 
 /**
  * @param {boolean} value

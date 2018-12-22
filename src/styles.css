@@ -1,17 +1,130 @@
+html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
   margin: 0;
   padding: 0;
-  background-color: antiquewhite;
+  background-color: #000;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+.app {
+  display: block;
+}
+
+.background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgb(98, 88, 166) url(./assets/backgrounds/01.jpg) no-repeat;
+  background-size: cover;
+  background-blend-mode: multiply;
+  z-index: 0;
+}
+
+.weather-container {
+  position: absolute;
+  width: 100%;
+  padding: 1.4em;
+  z-index: 1;
 }
 
 .city-title {
-
+  color: #fff;
+  text-shadow: 1px 1px 10px #333;
 }
 
 .temperature {
+  color: #fff;
+  text-shadow: 1px 1px 10px #333;
+}
 
+.temperature .weather-digit {
+  font-size: 8em;
+  float: left;
+  transition: 1s 0.2s ease-out;
+}
+
+.temperature .sup {
+  vertical-align: super;
+  font-size: 0.3em;
+}
+
+.temperature .icon {
+  font-family: 'weathericons', sans-serif;
+  font-size: 6em;
+  float: right;
+  margin-right: 0.6em;
+  margin-top: 0.2em;
+  transition: 1s 0.2s ease-out;
+  -webkit-font-smoothing: antialiased;
 }
 
 .does-it-suck {
+  position: absolute;
+  margin: 0;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  font-family: 'Fredoka One', sans-serif;
+  color: #fff;
+  font-size: 5rem;
+  transform: translate(-50%, -50%);
+  text-shadow: 1px 1px 10px #333;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.05em;
+  transition: 1s 0.2s ease-out;
+  cursor: default;
+  z-index: 1;
+}
 
+@media screen and (max-width: 700px) {
+  .temperature .weather-digit {
+    font-size: 6em;
+  }
+
+  .temperature .icon {
+    font-size: 4em;
+  }
+
+  .does-it-suck {
+    font-size: 4rem;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .does-it-suck {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .temperature .icon {
+    font-size: 2em;
+    margin-right: 1em;
+  }
+
+  .does-it-suck {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-height: 500px) {
+  .temperature .weather-digit {
+    font-size: 6em;
+  }
+
+  .temperature .icon {
+    font-size: 4em;
+  }
+
+  .does-it-suck {
+    transform: translate(-50%, 0%);
+    font-size: 4rem;
+  }
 }
