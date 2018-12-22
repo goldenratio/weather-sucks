@@ -7,8 +7,8 @@ class App extends Component {
     return html`
       <div class="app">
         <button onClick=${() => this.changeCity()}>settings</button>
-        <${CityHeader} value="Tallinn" /> 
-        <${Temperature} value="-10" unit="C" icon="SUNSHINE" /> 
+        <${CityHeader} value="Tallinn" />
+        <${Temperature} value="-10" unit="C" icon="SUNSHINE" />
       </div>
     `;
   }
