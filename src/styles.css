@@ -151,21 +151,6 @@ body {
 
 @media screen and (max-height: 500px) {
   .temperature .weather-digit {
-    font-size: 6em;
-  }
-
-  .temperature .icon {
-    font-size: 4em;
-  }
-
-  .does-it-suck {
-    transform: translate(-50%, 0%);
-    font-size: 4rem;
-  }
-}
-
-@media screen and (max-height: 350px) {
-  .temperature .weather-digit {
     font-size: 3em;
   }
 
