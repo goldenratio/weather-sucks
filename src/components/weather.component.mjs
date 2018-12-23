@@ -1,5 +1,5 @@
 import { html } from '../libs/preact.mjs';
-import { getWeatherIconContent } from '../utls.mjs';
+import { getForecastIcon } from '../utils.mjs';
 
 /**
  * @param {string} value
@@ -9,14 +9,25 @@ export const CityHeader = ({ value }) => html`<div class="city-title">${value}</
 /**
  * @param {string} value
  * @param {string} unit
- * @param {ICON_TYPE} icon
  */
-export const Temperature = ({ value, unit, icon }) => {
-  return html`
-    <div class="temperature">
-      <div class="weather-digit">${value}<sup><span class="sup">° ${unit}</span></sup></div>
-      <div class="icon"><div class="${icon}">${getWeatherIconContent()}</div></div>
-    </div>
+export const Temperature = ({ value, unit }) => {
+  return value === undefined ?
+    html`` :
+    html`
+      <div class="temperature">
+        <div class="weather-digit">${value}<sup><span class="sup">° ${unit}</span></sup></div>
+      </div>
+  `;
+};
+
+export const ForecastInfo = ({ description }) => {
+  return description === undefined ?
+    html`` :
+    html`
+      <div class="forecast">
+        <div class="icon">${getForecastIcon(description)}</div>
+        <div class="description">${description}</div>
+      </div>
   `;
 };
 
@@ -25,8 +36,7 @@ export const Background = () => html`<div class="background"></div>`;
 /**
  * @param {boolean} value
  */
-export const DoesItSuck = ({ value }) => html`<h1 class="does-it-suck">${value ? "Yes, It Sucks!" : "No, It is fine"}</h1>`;
-
+export const DoesItSuck = ({ value }) => html`<h1 class="does-it-suck">${value ? "Yes, It Sucks!" : ""}</h1>`;
 
 export const SettingsIcon = ({ onClick }) => {
   return html`

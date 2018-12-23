@@ -18,10 +18,6 @@
       padding: 1em;
     }
 
-    .weather-input-container {
-
-    }
-
     .iframe-window {
       margin-top: 2em;
     }
@@ -30,7 +26,7 @@
 <body>
 
 <div class="app">
-  <div class="weather-input-container">
+  <div>
     <form action="//api.openweathermap.org/data/2.5/weather" method="get" target="weather-window">
       City: <input type="text" value="" list="cities" name="q"/>
       <input type="hidden" value="html" name="mode"/>
@@ -39,11 +35,17 @@
     </form>
 
     <datalist id="cities">
-      <option value="Tallinn">
-      <option value="London">
+      <option value="Amsterdam">
+      <option value="Berlin">
+      <option value="Chennai">
       <option value="Delhi">
-      <option value="Paris">
+      <option value="Helsinki">
+      <option value="London">
       <option value="New York">
+      <option value="Paris">
+      <option value="Singapore">
+      <option value="Tallinn">
+      <option value="Tartu">
     </datalist>
   </div>
 

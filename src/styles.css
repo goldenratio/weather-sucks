@@ -55,14 +55,25 @@ body {
   font-size: 0.3em;
 }
 
-.temperature .icon {
+.forecast {
+  float: right;
+  color: white;
+  margin-right: 3em;
+  margin-top: 0.2em;
+  text-align: center;
+}
+
+.forecast .icon {
   font-family: 'weathericons', sans-serif;
   font-size: 6em;
-  float: right;
-  margin-right: 0.6em;
-  margin-top: 0.2em;
   transition: 1s 0.2s ease-out;
   -webkit-font-smoothing: antialiased;
+}
+
+.forecast .description {
+  font-size: 1em;
+  text-shadow: 1px 1px 10px #333;
+  text-transform: capitalize;
 }
 
 .does-it-suck {
@@ -86,8 +97,10 @@ body {
 .settings-icon {
   display: block;
   float: right;
-  margin-right: 2em;
+  margin-right: 3em;
   fill: #fff;
+  opacity: 0.5;
+  width: 2em;
   transition: 1s 0.2s ease-out;
   text-shadow: 1px 1px 10px #333;
   cursor: pointer;
@@ -118,7 +131,7 @@ body {
     font-size: 6em;
   }
 
-  .temperature .icon {
+  .forecast .icon {
     font-size: 4em;
   }
 
@@ -139,9 +152,16 @@ body {
 }
 
 @media screen and (max-width: 400px) {
-  .temperature .icon {
+  .forecast {
+    margin-top: 1.8em;
+  }
+
+  .forecast .icon {
     font-size: 2em;
-    margin-right: 1em;
+  }
+
+  .forecast .description {
+    width: 5em;
   }
 
   .does-it-suck {
@@ -153,15 +173,22 @@ body {
   .temperature .weather-digit {
     font-size: 3em;
   }
+
+  .forecast {
+    margin-top: 0.2em;
+  }
+
+  .forecast .description {
+    font-size: 0.6em;
+  }
 }
 
 @media screen and (max-width: 160px) {
   .temperature .weather-digit {
     font-size: 2em;
   }
-  .temperature .icon {
+  .forecast .icon {
     font-size: 1em;
-    margin-right: 2em;
   }
 }
 
@@ -170,9 +197,8 @@ body {
     font-size: 3em;
   }
 
-  .temperature .icon {
+  .forecast .icon {
     font-size: 2em;
-    margin-right: 1.2em;
   }
 
   .does-it-suck {

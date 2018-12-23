@@ -1,3 +1,3 @@
 /**
- * @typedef {('SUNSHINE' || 'RAINY')} ICON_TYPE
+ * @typedef {('C' || 'F')} Unit
  */
