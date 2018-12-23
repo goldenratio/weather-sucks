@@ -20,12 +20,10 @@ class App extends Component {
   }
 
   openSettingsPanel() {
-    console.log('open settings panel');
     this.setState({ showSettingsPanel: true });
   }
 
   closeSettingsPanel() {
-    console.log('close settings panel');
     this.setState({ showSettingsPanel: false });
   }
 }
