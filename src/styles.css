@@ -202,7 +202,7 @@ body {
   }
 
   .does-it-suck {
-    transform: translate(-50%, 0%);
+    transform: translate(-50%, 100%);
     font-size: 3rem;
   }
 }
