@@ -7,9 +7,10 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-color: #000;
+  background-color: black;
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
+  color: white;
 }
 
 .app {
@@ -56,13 +57,11 @@ body {
 }
 
 .city-title {
-  color: #fff;
   text-shadow: 1px 1px 10px #333;
   text-transform: capitalize;
 }
 
 .temperature {
-  color: #fff;
   text-shadow: 1px 1px 10px #333;
   clear: both;
 }
@@ -80,7 +79,6 @@ body {
 
 .forecast {
   float: right;
-  color: white;
   margin-right: 3em;
   margin-top: 0.2em;
   text-align: center;
@@ -106,7 +104,6 @@ body {
   top: 50%;
   width: 100%;
   font-family: 'Fredoka One', sans-serif;
-  color: #fff;
   font-size: 5rem;
   transform: translate(-50%, -50%);
   text-shadow: 1px 1px 10px #333;

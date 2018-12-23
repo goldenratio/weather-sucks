@@ -14,5 +14,5 @@ export const SettingsPanel = ({ onCloseClick, onSaveClick }) => {
         <input type="button" value="Save" onclick="${() => console.log(this)}" />
         </div>
       </div>
-    `;;
+    `;
 };
