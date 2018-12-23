@@ -41,6 +41,7 @@ body {
 .temperature {
   color: #fff;
   text-shadow: 1px 1px 10px #333;
+  clear: both;
 }
 
 .temperature .weather-digit {
@@ -78,9 +79,22 @@ body {
   text-transform: uppercase;
   text-align: center;
   letter-spacing: 0.05em;
-  transition: 1s 0.2s ease-out;
   cursor: default;
   z-index: 1;
+}
+
+.settings-icon {
+  display: block;
+  float: right;
+  margin-right: 2em;
+  fill: #fff;
+  transition: 1s 0.2s ease-out;
+  text-shadow: 1px 1px 10px #333;
+  cursor: pointer;
+}
+
+.settings-icon :hover {
+  fill: antiquewhite;
 }
 
 @media screen and (max-width: 700px) {
@@ -90,6 +104,11 @@ body {
 
   .temperature .icon {
     font-size: 4em;
+  }
+
+  .settings-icon{
+    width: 1.8em;
+    margin-top: -1em;
   }
 
   .does-it-suck {
@@ -111,6 +130,22 @@ body {
 
   .does-it-suck {
     font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 250px) {
+  .temperature .weather-digit {
+    font-size: 3em;
+  }
+}
+
+@media screen and (max-width: 160px) {
+  .temperature .weather-digit {
+    font-size: 2em;
+  }
+  .temperature .icon {
+    font-size: 1em;
+    margin-right: 2em;
   }
 }
 

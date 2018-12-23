@@ -1,5 +1,5 @@
 import { html, Component, render } from './libs/preact.mjs';
-import { Background, CityHeader, doesItSuck, Temperature } from './components/weather.component.mjs';
+import { Background, CityHeader, doesItSuck, SettingsIcon, Temperature } from './components/weather.component.mjs';
 
 class App extends Component {
 
@@ -8,6 +8,7 @@ class App extends Component {
       <div class="app">
         <${Background} />
         <div class="weather-container">
+          <${SettingsIcon} onClick="${() => this.openSettingsPanel()}" /> 
           <${CityHeader} value="Tallinn" />
           <${Temperature} value="-10" unit="C" icon="SUNSHINE" />
         </div>
@@ -16,6 +17,9 @@ class App extends Component {
     `;
   }
 
+  openSettingsPanel() {
+    console.log('open settings panel');
+  }
 }
 
 window.onload = () => {
