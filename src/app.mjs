@@ -1,12 +1,14 @@
 import { html, Component, render } from './libs/preact.mjs';
 import { Background, CityHeader, DoesItSuck, SettingsIcon, Temperature } from './components/weather.component.mjs';
+import { SettingsPanel } from './components/settings-panel.component.mjs';
 
 class App extends Component {
 
-  render() {
+  render({ }, { showSettingsPanel = false }) {
     return html`
       <div class="app">
         <${Background} />
+        <${SettingsPanel} show=${showSettingsPanel} onCloseClick=${() => this.closeSettingsPanel()} />
         <div class="weather-container">
           <${SettingsIcon} onClick="${() => this.openSettingsPanel()}" /> 
           <${CityHeader} value="Tallinn" />
@@ -19,6 +21,12 @@ class App extends Component {
 
   openSettingsPanel() {
     console.log('open settings panel');
+    this.setState({ showSettingsPanel: true });
+  }
+
+  closeSettingsPanel() {
+    console.log('close settings panel');
+    this.setState({ showSettingsPanel: false });
   }
 }
 
