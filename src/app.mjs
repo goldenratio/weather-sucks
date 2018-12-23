@@ -12,10 +12,10 @@ class App extends Component {
 
   componentDidMount() {
     this.setState({
-      city: 'Tartu',
+      city: localStorage.getItem('weather-sucks.city') || 'London',
       country: '',
       temperature: undefined,
-      unit: 'C',
+      unit: localStorage.getItem('weather-sucks.unit') || 'C',
       forecast: undefined,
       showSettingsPanel: false,
       doesItSuck: true
@@ -25,10 +25,17 @@ class App extends Component {
   }
 
   render({}, { showSettingsPanel, city, doesItSuck, temperature, unit, forecast }) {
+    if (showSettingsPanel === undefined) {
+      return html``;
+    }
     return html`
       <div class="app">
-        <${Background} />
-        <${SettingsPanel} show=${showSettingsPanel} onCloseClick=${() => this.closeSettingsPanel()} />
+        <${Background} forecast="${forecast}" />
+        ${
+          !showSettingsPanel ? 
+            html`` : 
+            html`<${SettingsPanel} onCloseClick=${() => this.closeSettingsPanel()} onSaveClick=${(unit, city) => this.saveSettings(unit, city)} />`
+        }
         <div class="weather-container">
           <${SettingsIcon} onClick="${() => this.openSettingsPanel()}" /> 
           <${CityHeader} value="${city}" />
@@ -48,6 +55,25 @@ class App extends Component {
     this.setState({ showSettingsPanel: false });
   }
 
+  saveSettings(unit, city) {
+    if (city && city.trim() !== '') {
+      localStorage.setItem('weather-sucks.city', city);
+      this.setState({
+        city
+      });
+    }
+
+    if (unit && (unit === 'C' || unit === 'F')) {
+      localStorage.setItem('weather-sucks.unit', unit);
+      this.setState({
+        unit
+      });
+    }
+
+    this.closeSettingsPanel();
+    this.updateWeather();
+  }
+
   updateWeather() {
     const { city, country, unit } = this.state;
     const url = weatherApiUrl(city, country);
@@ -57,27 +83,28 @@ class App extends Component {
       })
       .then(json => {
         console.log(json);
-        const { cod, main, weather } = json;
+        const { cod } = json;
+        if (cod === 200) {
+          const { main, weather } = json;
+          if (typeof main !== 'undefined') {
+            this.setState({
+              temperature: convertKelvinTo(main.temp, unit),
+            });
+          }
 
-        if (cod === '404') {
-          console.log('error');
-          return;
+          if (typeof weather !== 'undefined' && weather.length > 0) {
+            this.setState({
+              forecast: weather[0].description || undefined,
+            });
+          }
+        } else {
+          throw Error(cod);
         }
 
-        if (typeof main !== 'undefined') {
-          this.setState({
-            temperature: convertKelvinTo(main.temp, unit),
-          });
-        }
-
-        if (typeof weather !== 'undefined' && weather.length > 0) {
-          this.setState({
-            forecast: weather[0].description || undefined,
-          });
-        }
       })
       .catch(err => {
         console.error('Error: ', err);
+        this.openSettingsPanel();
       });
   }
 }

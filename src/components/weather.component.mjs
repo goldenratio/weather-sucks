@@ -1,5 +1,5 @@
 import { html } from '../libs/preact.mjs';
-import { getForecastIcon } from '../utils.mjs';
+import { getForecastIcon, getBackground } from '../utils.mjs';
 
 /**
  * @param {string} value
@@ -31,7 +31,10 @@ export const ForecastInfo = ({ description }) => {
   `;
 };
 
-export const Background = () => html`<div class="background"></div>`;
+export const Background = ({ forecast }) => {
+  const bg = getBackground(forecast);
+  return html`<div class="background background-default"></div>`;
+};
 
 /**
  * @param {boolean} value

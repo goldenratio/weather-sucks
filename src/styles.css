@@ -20,10 +20,32 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: rgb(98, 88, 166) url(./assets/backgrounds/01.jpg) no-repeat;
+  background-color: black;
+  z-index: 0;
+}
+
+.background-rain {
+  background: rgb(98, 88, 166) url(assets/backgrounds/rain.jpg) no-repeat;
   background-size: cover;
   background-blend-mode: multiply;
-  z-index: 0;
+}
+
+.background-snow {
+  background: rgb(98, 88, 166) url(assets/backgrounds/rain.jpg) no-repeat;
+  background-size: cover;
+  background-blend-mode: multiply;
+}
+
+.background-sun {
+  background: rgb(98, 88, 166) url(assets/backgrounds/rain.jpg) no-repeat;
+  background-size: cover;
+  background-blend-mode: multiply;
+}
+
+.background-default {
+  background: rgb(98, 88, 166) url(assets/backgrounds/rain.jpg) no-repeat;
+  background-size: cover;
+  background-blend-mode: multiply;
 }
 
 .weather-container {
@@ -36,6 +58,7 @@ body {
 .city-title {
   color: #fff;
   text-shadow: 1px 1px 10px #333;
+  text-transform: capitalize;
 }
 
 .temperature {

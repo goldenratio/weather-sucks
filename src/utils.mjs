@@ -67,9 +67,18 @@ export function getForecastIcon(forecast) {
 }
 
 /**
+ * @param {string} forecast
+ * @returns {BackgroundType}
+ */
+export function getBackground(forecast) {
+  return 'default';
+}
+
+/**
  * @param {number} kelvin
  * @param {Unit} unit
- * @returns {number|undefined}
+ * @throws {Error}
+ * @returns {number}
  */
 export function convertKelvinTo(kelvin, unit) {
   if (typeof kelvin !== 'number') {
@@ -83,5 +92,6 @@ export function convertKelvinTo(kelvin, unit) {
   if (unit === 'F') {
     return Math.round((kelvin - 273.15) * (9/5) + 32);
   }
-  return undefined;
+
+  throw Error('unknown unit: ' + unit);
 }
