@@ -25,7 +25,7 @@ export const Background = () => html`<div class="background"></div>`;
 /**
  * @param {boolean} value
  */
-export const doesItSuck = ({ value }) => html`<h1 class="does-it-suck">${value ? "Yes, It Sucks!" : "No, It is fine"}</h1>`;
+export const DoesItSuck = ({ value }) => html`<h1 class="does-it-suck">${value ? "Yes, It Sucks!" : "No, It is fine"}</h1>`;
 
 
 export const SettingsIcon = ({ onClick }) => {

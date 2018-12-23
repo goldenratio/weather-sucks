@@ -2,23 +2,55 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <title>Weather Sucks?</title>
   <link rel="manifest" href="./manifest.json">
-  <link rel="stylesheet" type="text/css" href="./styles.css"/>
+  <style type="text/css">
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      font-family: 'Roboto', sans-serif;
+      font-size: 16px;
+    }
+
+    .app {
+      padding: 1em;
+    }
+
+    .weather-input-container {
+
+    }
+
+    .iframe-window {
+      margin-top: 2em;
+    }
+  </style>
 </head>
 <body>
 
-<div>
-  <form action="//api.openweathermap.org/data/2.5/weather" method="get" target="weather-window">
-    City: <input type="text" value="" name="q"/>
-    <input type="hidden" value="html" name="mode"/>
-    <input type="hidden" value="1589940d6e6075602eefa336163efef3" name="APPID"/>
-    <input type="submit" value="Search">
-  </form>
-</div>
+<div class="app">
+  <div class="weather-input-container">
+    <form action="//api.openweathermap.org/data/2.5/weather" method="get" target="weather-window">
+      City: <input type="text" value="" list="cities" name="q"/>
+      <input type="hidden" value="html" name="mode"/>
+      <input type="hidden" value="1589940d6e6075602eefa336163efef3" name="APPID"/>
+      <input type="submit" value="Search">
+    </form>
 
-<div>
-  <iframe name="weather-window" width="600px" height="500px" frameborder="0"></iframe>
+    <datalist id="cities">
+      <option value="Tallinn">
+      <option value="London">
+      <option value="Delhi">
+      <option value="Paris">
+      <option value="New York">
+    </datalist>
+  </div>
+
+  <div class="iframe-window">
+    <iframe name="weather-window" width="100%" frameborder="0"></iframe>
+  </div>
+
 </div>
 
 </body>

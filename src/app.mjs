@@ -1,5 +1,5 @@
 import { html, Component, render } from './libs/preact.mjs';
-import { Background, CityHeader, doesItSuck, SettingsIcon, Temperature } from './components/weather.component.mjs';
+import { Background, CityHeader, DoesItSuck, SettingsIcon, Temperature } from './components/weather.component.mjs';
 
 class App extends Component {
 
@@ -12,7 +12,7 @@ class App extends Component {
           <${CityHeader} value="Tallinn" />
           <${Temperature} value="-10" unit="C" icon="SUNSHINE" />
         </div>
-        <${doesItSuck} value=${true} />
+        <${DoesItSuck} value=${true} />
       </div>
     `;
   }
