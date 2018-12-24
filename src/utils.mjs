@@ -72,7 +72,7 @@ export function getForecastIcon(forecast) {
 export function getBackground(forecast) {
   const key = forecast.toLowerCase();
 
-  if (key.indexOf('mist') >= 0 || key.indexOf('haze') >= 0 || key.indexOf('smoke') >= 0) {
+  if (key.indexOf('mist') >= 0 || key.indexOf('haze') >= 0 || key.indexOf('smoke') >= 0 || key.indexOf('fog') >= 0) {
     return 'mist';
   }
 
