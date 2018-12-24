@@ -28,6 +28,20 @@ class App extends Component {
       doesItSuck: true
     });
 
+    /** @type {number|undefined} **/
+    this.lastUpdated = undefined;
+
+    window.addEventListener('focus', () => {
+      console.log('focus');
+      if (this.lastUpdated === undefined) {
+        return;
+      }
+      const timeDiff = Date.now() - this.lastUpdated;
+      // 60000 = 1 minute
+      if (timeDiff > 60000) {
+        this.updateWeather();
+      }
+    });
     this.updateWeather();
   }
 
@@ -95,6 +109,7 @@ class App extends Component {
           temperature: convertKelvinTo(temperature, unit),
           forecast
         });
+        this.lastUpdated = Date.now();
       })
       .catch(/** @type {number} **/ errCode => {
         console.log('error: ', errCode);
