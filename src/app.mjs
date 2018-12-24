@@ -96,6 +96,8 @@ class App extends Component {
     }
 
     this.closeSettingsPanel();
+    history.pushState({}, '', './');
+
     this.updateWeather();
   }
 
