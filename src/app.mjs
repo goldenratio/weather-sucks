@@ -58,7 +58,7 @@ class App extends Component {
             html`` : 
             html`<${SettingsPanel} unit="${unit}" city="${city}" onCloseClick=${() => this.closeSettingsPanel()} onSaveClick=${(unit, city) => this.saveSettings(unit, city)} />`
         }
-        <${Background} forecast="${forecast}" blur=${showSettingsPanel} />
+        <${Background} forecast="${forecast}" />
         <div class=${`weather-container ${blurClass}`}>
           <div style="padding: 1.4em;">
             <${SettingsIcon} onClick="${() => this.openSettingsPanel()}" /> 
