@@ -28,10 +28,12 @@ export function fetchWeatherInfo(city, country) {
         const { /** @type {number|string} **/ cod } = json;
         const code = toInt(cod);
         if (code === 200) {
-          const { main, weather } = json;
+          const { main, weather, sys, name } = json;
           resolve(/** @type {WeatherInfo} **/ {
             temperature: main ? main.temp : undefined,
-            forecast: (weather && weather.length > 0) ? weather[0].description : undefined
+            forecast: (weather && weather.length > 0) ? weather[0].description : undefined,
+            country: sys ? sys.country : undefined,
+            city: name
           });
         } else {
           throw Error(code.toString());

@@ -103,10 +103,12 @@ class App extends Component {
     const { city, country, unit } = this.state;
     fetchWeatherInfo(city, country)
       .then(/** @type {WeatherInfo} **/ data => {
-        const { temperature, forecast } = data;
+        const { temperature, forecast, city, country } = data;
         this.setState({
           temperature: convertKelvinTo(temperature, unit),
-          forecast
+          forecast,
+          city,
+          country
         });
         this.lastUpdated = Date.now();
       })
