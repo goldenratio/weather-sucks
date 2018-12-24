@@ -95,3 +95,20 @@ export function convertKelvinTo(kelvin, unit) {
 
   throw Error('unknown unit: ' + unit);
 }
+
+/**
+ * @param {string|number} value
+ * @throws {Error}
+ * @returns {number}
+ */
+export function toInt(value) {
+  if (typeof value === 'number') {
+    return value;
+  }
+
+  if (typeof value === 'string') {
+    return parseInt(value, 10) || 0;
+  }
+
+  throw Error('invalid type');
+}

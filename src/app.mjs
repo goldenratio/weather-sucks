@@ -1,7 +1,7 @@
 import { html, Component, render } from './libs/preact.mjs';
 import { Background, CityHeader, DoesItSuck, SettingsIcon, ForecastInfo, Temperature } from './components/weather.component.mjs';
 import { SettingsPanel } from './components/settings-panel.component.mjs';
-import { convertKelvinTo } from './utils.mjs';
+import { convertKelvinTo, toInt } from './utils.mjs';
 
 /**
  * @param {string} city
@@ -10,7 +10,7 @@ import { convertKelvinTo } from './utils.mjs';
  */
 const weatherApiUrl = (city, country) => {
   const q = country ? `${city},${country}` : `${city}`;
-  return `https://api.openweathermap.org/data/2.5/weather?q=${q}&APPID=1589940d6e6075602eefa336163efef3`;
+  return `https://api.openweathermap.org/data/2.5/weather?q=${q}&lang=en&APPID=1589940d6e6075602eefa336163efef3`;
 };
 
 /** @type {StorageKey} **/
@@ -102,8 +102,9 @@ class App extends Component {
       })
       .then(json => {
         console.log(json);
-        const { cod } = json;
-        if (cod === 200) {
+        const { /** @type {number|string} **/ cod } = json;
+        const code = toInt(cod);
+        if (code === 200) {
           const { main, weather } = json;
           if (typeof main !== 'undefined') {
             this.setState({
@@ -117,19 +118,24 @@ class App extends Component {
             });
           }
         } else {
-          throw Error(cod);
+          throw Error(code.toString());
         }
 
       })
       .catch(err => {
-        console.error('Error: ', err);
-        if (err === '500') {
+        const { /** @type {string} **/ message } = err;
+        const code = toInt(message);
+        if (code === 500) {
           // retry
           setTimeout(() => {
             this.updateWeather();
           }, 2000);
-        } else {
+        } else if (code === 404) {
+          // city not found
+          console.log('city not found');
           this.openSettingsPanel();
+        } else {
+          console.log('unknown error, code: ' + code);
         }
       });
   }
