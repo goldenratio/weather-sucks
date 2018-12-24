@@ -100,8 +100,8 @@ class App extends Component {
   }
 
   updateWeather() {
-    const { city, country, unit } = this.state;
-    fetchWeatherInfo(city, country)
+    const { city, unit } = this.state;
+    fetchWeatherInfo(city)
       .then(/** @type {WeatherInfo} **/ data => {
         const { temperature, forecast, city, country } = data;
         this.setState({

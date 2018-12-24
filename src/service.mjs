@@ -2,10 +2,10 @@ import { toInt } from './utils.mjs';
 
 /**
  * @param {string} city
- * @param {string|undefined} country
+ * @param {string|undefined} [country='']
  * @returns {string}
  */
-const weatherApiUrl = (city, country) => {
+const weatherApiUrl = (city, country = '') => {
   const q = country ? `${city},${country}` : `${city}`;
   return `https://api.openweathermap.org/data/2.5/weather?q=${q}&lang=en&APPID=1589940d6e6075602eefa336163efef3`;
 };
@@ -13,12 +13,11 @@ const weatherApiUrl = (city, country) => {
 /**
  *
  * @param {string} city
- * @param {string|undefined} country
  * @returns {Promise<WeatherInfo>}
  */
-export function fetchWeatherInfo(city, country) {
+export function fetchWeatherInfo(city) {
   return new Promise((resolve, reject) => {
-    const url = weatherApiUrl(city, country);
+    const url = weatherApiUrl(city);
     fetch(url)
       .then(response => {
         return response.json();
