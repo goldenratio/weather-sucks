@@ -47,10 +47,12 @@ class App extends Component {
         }
         <${Background} forecast="${forecast}" blur=${showSettingsPanel} />
         <div class=${`weather-container ${blurClass}`}>
-          <${SettingsIcon} onClick="${() => this.openSettingsPanel()}" /> 
-          <${CityHeader} city="${city}" country="${country}" />
-          <${Temperature} value="${temperature}" unit="${unit}" />
-          <${ForecastInfo} description="${forecast}" />
+          <div style="padding: 1.4em;">
+            <${SettingsIcon} onClick="${() => this.openSettingsPanel()}" /> 
+            <${CityHeader} city="${city}" country="${country}" />
+            <${Temperature} value="${temperature}" unit="${unit}" />
+            <${ForecastInfo} description="${forecast}" />
+          </div>
         </div>
         <${DoesItSuck} value=${doesItSuck} blur=${showSettingsPanel} />
       </div>

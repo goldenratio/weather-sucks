@@ -53,7 +53,6 @@ body {
 .weather-container {
   position: absolute;
   width: 100%;
-  padding: 1.4em;
   z-index: 1;
 }
 
@@ -80,7 +79,6 @@ body {
 
 .forecast {
   float: right;
-  margin-right: 3em;
   margin-top: 0.2em;
   text-align: center;
 }
@@ -119,7 +117,6 @@ body {
 .settings-icon {
   display: block;
   float: right;
-  margin-right: 3em;
   fill: #fff;
   opacity: 0.5;
   width: 2em;
@@ -192,6 +189,7 @@ body {
 @media screen and (max-width: 400px) {
   .forecast {
     margin-top: 1.8em;
+    margin-right: -1em;
   }
 
   .forecast .icon {
