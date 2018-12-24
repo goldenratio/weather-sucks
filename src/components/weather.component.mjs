@@ -2,9 +2,13 @@ import { html } from '../libs/preact.mjs';
 import { getForecastIcon, getBackground } from '../utils.mjs';
 
 /**
- * @param {string} value
+ * @param {string} city
+ * @param {string} country
  */
-export const CityHeader = ({ value }) => html`<div class="city-title">${value}</div>`;
+export const CityHeader = ({ city, country }) => {
+  const info = !country ? `${city}` : `${city}, ${country}`;
+  return html`<div class="city-title">${info}</div>`;
+};
 
 /**
  * @param {string} value
@@ -20,6 +24,9 @@ export const Temperature = ({ value, unit }) => {
   `;
 };
 
+/**
+ * @param {string} description
+ */
 export const ForecastInfo = ({ description }) => {
   return description === undefined ?
     html`` :
@@ -31,16 +38,27 @@ export const ForecastInfo = ({ description }) => {
   `;
 };
 
-export const Background = ({ forecast }) => {
-  const bg = getBackground(forecast);
-  return html`<div class="background background-default"></div>`;
+/**
+ * @param {string} forecast
+ * @param {boolean} blur
+ */
+export const Background = ({ forecast, blur }) => {
+  const blurClass = blur ? 'blur' : '';
+  return html`<div class=${`background background-${getBackground(forecast)} ${blurClass}`}></div>`;
 };
 
 /**
  * @param {boolean} value
+ * @param {boolean} blur
  */
-export const DoesItSuck = ({ value }) => html`<h1 class="does-it-suck">${value ? "Yes, It Sucks!" : ""}</h1>`;
+export const DoesItSuck = ({ value, blur }) => {
+  const blurClass = blur ? 'blur' : '';
+  return html`<h1 class=${`does-it-suck ${blurClass}`}>${value ? "Yes, It Sucks!" : ""}</h1>`;
+};
 
+/**
+ * @param {() => void} onClick
+ */
 export const SettingsIcon = ({ onClick }) => {
   return html`
     <div onclick="${() => onClick()}">

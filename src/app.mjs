@@ -3,19 +3,35 @@ import { Background, CityHeader, DoesItSuck, SettingsIcon, ForecastInfo, Tempera
 import { SettingsPanel } from './components/settings-panel.component.mjs';
 import { convertKelvinTo } from './utils.mjs';
 
-export const weatherApiUrl = (city, country) => {
+/**
+ * @param {string} city
+ * @param {string} country
+ * @returns {string}
+ */
+const weatherApiUrl = (city, country) => {
   const q = country ? `${city},${country}` : `${city}`;
   return `https://api.openweathermap.org/data/2.5/weather?q=${q}&APPID=1589940d6e6075602eefa336163efef3`;
+};
+
+/** @type {StorageKey} **/
+const storageKey = {
+  CITY: 'weather-sucks.city',
+  UNIT: 'weather-sucks.unit'
 };
 
 class App extends Component {
 
   componentDidMount() {
+    const urlParam = new URLSearchParams(location.search);
+    const city = urlParam.get('city') || localStorage.getItem(storageKey.CITY) || 'London';
+    const country = urlParam.get('country') || '';
+    const unit = (urlParam.get('unit') || localStorage.getItem(storageKey.UNIT) || 'C').toUpperCase();
+
     this.setState({
-      city: localStorage.getItem('weather-sucks.city') || 'London',
-      country: '',
+      city,
+      country,
+      unit,
       temperature: undefined,
-      unit: localStorage.getItem('weather-sucks.unit') || 'C',
       forecast: undefined,
       showSettingsPanel: false,
       doesItSuck: true
@@ -24,25 +40,28 @@ class App extends Component {
     this.updateWeather();
   }
 
-  render({}, { showSettingsPanel, city, doesItSuck, temperature, unit, forecast }) {
+  render({}, { showSettingsPanel, city, country, doesItSuck, temperature, unit, forecast }) {
     if (showSettingsPanel === undefined) {
       return html``;
     }
+
+    const blurClass = showSettingsPanel ? 'blur' : '';
+
     return html`
       <div class="app">
-        <${Background} forecast="${forecast}" />
         ${
           !showSettingsPanel ? 
             html`` : 
             html`<${SettingsPanel} onCloseClick=${() => this.closeSettingsPanel()} onSaveClick=${(unit, city) => this.saveSettings(unit, city)} />`
         }
-        <div class="weather-container">
+        <${Background} forecast="${forecast}" blur=${showSettingsPanel} />
+        <div class=${`weather-container ${blurClass}`}>
           <${SettingsIcon} onClick="${() => this.openSettingsPanel()}" /> 
-          <${CityHeader} value="${city}" />
+          <${CityHeader} city="${city}" country="${country}" />
           <${Temperature} value="${temperature}" unit="${unit}" />
           <${ForecastInfo} description="${forecast}" />
         </div>
-        <${DoesItSuck} value=${doesItSuck} />
+        <${DoesItSuck} value=${doesItSuck} blur=${showSettingsPanel} />
       </div>
     `;
   }
@@ -57,14 +76,14 @@ class App extends Component {
 
   saveSettings(unit, city) {
     if (city && city.trim() !== '') {
-      localStorage.setItem('weather-sucks.city', city);
+      localStorage.setItem(storageKey.CITY, city);
       this.setState({
         city
       });
     }
 
     if (unit && (unit === 'C' || unit === 'F')) {
-      localStorage.setItem('weather-sucks.unit', unit);
+      localStorage.setItem(storageKey.UNIT, unit);
       this.setState({
         unit
       });
@@ -104,7 +123,14 @@ class App extends Component {
       })
       .catch(err => {
         console.error('Error: ', err);
-        this.openSettingsPanel();
+        if (err === '500') {
+          // retry
+          setTimeout(() => {
+            this.updateWeather();
+          }, 2000);
+        } else {
+          this.openSettingsPanel();
+        }
       });
   }
 }
