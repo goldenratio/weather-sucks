@@ -24,7 +24,7 @@ export function fetchWeatherInfo(city, country) {
         return response.json();
       })
       .then(json => {
-        console.log(json);
+        // console.log(json);
         const { /** @type {number|string} **/ cod } = json;
         const code = toInt(cod);
         if (code === 200) {

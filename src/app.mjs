@@ -43,7 +43,7 @@ class App extends Component {
         ${
           !showSettingsPanel ? 
             html`` : 
-            html`<${SettingsPanel} onCloseClick=${() => this.closeSettingsPanel()} onSaveClick=${(unit, city) => this.saveSettings(unit, city)} />`
+            html`<${SettingsPanel} unit="${unit}" city="${city}" onCloseClick=${() => this.closeSettingsPanel()} onSaveClick=${(unit, city) => this.saveSettings(unit, city)} />`
         }
         <${Background} forecast="${forecast}" blur=${showSettingsPanel} />
         <div class=${`weather-container ${blurClass}`}>
@@ -65,8 +65,8 @@ class App extends Component {
     this.setState({ showSettingsPanel: false });
   }
 
-  saveSettings(unit, city) {
-    if (city && city.trim() !== '') {
+  saveSettings(city, unit) {
+    if (city) {
       localStorage.setItem(storageKey.CITY, city);
       this.setState({
         city
@@ -96,10 +96,21 @@ class App extends Component {
       })
       .catch(/** @type {number} **/ errCode => {
         console.log('error: ', errCode);
+        this.setState({
+          temperature: undefined,
+          forecast: undefined
+        });
+
+        if (errCode === 404) {
+          alert('Invalid City Name');
+        }
+        this.openSettingsPanel();
       });
   }
 }
 
 window.onload = () => {
+  console.log('Created by: @karthikvj https://twitter.com/karthikvj');
+  console.log('Source: https://github.com/goldenratio/weather-sucks');
   render(html`<${App} />`, document.body);
 };
