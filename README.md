@@ -1,5 +1,6 @@
 # weather-sucks
 Our Earth needs yet another Weather App.
+Demo: https://doesweathersuck.com/
 
 
 Proof of Concept app, to showcase:
