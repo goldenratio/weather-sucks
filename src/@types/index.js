@@ -3,7 +3,7 @@
  */
 
 /**
- * @typedef {('rain' || 'snow' || 'sun' || 'default')} BackgroundType
+ * @typedef {('rain' || 'snow' || 'clear-day' || 'clear-night' || 'mist' || 'clouds' || 'default')} BackgroundType
  */
 
 /**

@@ -43,6 +43,9 @@ export const ForecastInfo = ({ description }) => {
  * @param {boolean} blur
  */
 export const Background = ({ forecast, blur }) => {
+  if (forecast === undefined) {
+    return html``;
+  }
   const blurClass = blur ? 'blur' : '';
   return html`<div class=${`background background-${getBackground(forecast)} ${blurClass}`}></div>`;
 };

@@ -3,12 +3,11 @@
  * @returns {string}
  */
 export function getForecastIcon(forecast) {
-  const hours = new Date().getHours();
-  const isDay = hours > 6 && hours < 18;
   const key = forecast.toLowerCase();
 
   if (key.indexOf('clear') >= 0) {
-    return isDay ? '' : '';
+    const day = isDay();
+    return day ? '' : '';
   }
 
   if (key.indexOf('rain') >= 0) {
@@ -71,6 +70,28 @@ export function getForecastIcon(forecast) {
  * @returns {BackgroundType}
  */
 export function getBackground(forecast) {
+  const key = forecast.toLowerCase();
+
+  if (key.indexOf('mist') >= 0 || key.indexOf('haze') >= 0 || key.indexOf('smoke') >= 0) {
+    return 'mist';
+  }
+
+  if (key.indexOf('cloud') >= 0) {
+    return 'clouds';
+  }
+
+  if (key.indexOf('rain') >= 0) {
+    return 'rain';
+  }
+
+  if (key.indexOf('snow') >= 0) {
+    return 'snow';
+  }
+
+  if (key.indexOf('clear') >= 0) {
+    const day = isDay();
+    return day ? 'clear-day' : 'clear-night';
+  }
   return 'default';
 }
 
@@ -111,4 +132,12 @@ export function toInt(value) {
   }
 
   throw Error('invalid type');
+}
+
+/**
+ * @returns {boolean}
+ */
+export function isDay() {
+  const hours = new Date().getHours();
+  return hours > 6 && hours < 18;
 }
