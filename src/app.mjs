@@ -32,13 +32,12 @@ class App extends Component {
     this.lastUpdated = undefined;
 
     window.addEventListener('focus', () => {
-      console.log('focus');
       if (this.lastUpdated === undefined) {
         return;
       }
       const timeDiff = Date.now() - this.lastUpdated;
-      // 60000 = 1 minute
-      if (timeDiff > 60000) {
+      // 120000 = 2 minutes
+      if (timeDiff > 120000) {
         this.updateWeather();
       }
     });
