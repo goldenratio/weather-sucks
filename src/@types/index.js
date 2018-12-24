@@ -12,3 +12,8 @@
  * @property {string} UNIT
  */
 
+/**
+ * @typedef {Readonly<object>} WeatherInfo
+ * @property {number|undefined} temperature in Kelvin
+ * @property {string|undefined} forecast
+ */

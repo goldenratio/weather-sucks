@@ -1,7 +1,9 @@
-import { html } from '../libs/preact.mjs';
+import { html, Component } from '../libs/preact.mjs';
 
-export const SettingsPanel = ({ onCloseClick, onSaveClick }) => {
-  return html`
+export class SettingsPanel extends Component {
+
+  render({ onCloseClick, onSaveClick }) {
+    return html`
       <div class="settings-panel" onclick="${() => onCloseClick()}">
         <div onclick="${event => event.stopPropagation() }">
         
@@ -15,4 +17,6 @@ export const SettingsPanel = ({ onCloseClick, onSaveClick }) => {
         </div>
       </div>
     `;
-};
+  }
+
+}

@@ -1,17 +1,8 @@
 import { html, Component, render } from './libs/preact.mjs';
 import { Background, CityHeader, DoesItSuck, SettingsIcon, ForecastInfo, Temperature } from './components/weather.component.mjs';
 import { SettingsPanel } from './components/settings-panel.component.mjs';
-import { convertKelvinTo, toInt } from './utils.mjs';
-
-/**
- * @param {string} city
- * @param {string} country
- * @returns {string}
- */
-const weatherApiUrl = (city, country) => {
-  const q = country ? `${city},${country}` : `${city}`;
-  return `https://api.openweathermap.org/data/2.5/weather?q=${q}&lang=en&APPID=1589940d6e6075602eefa336163efef3`;
-};
+import { convertKelvinTo } from './utils.mjs';
+import { fetchWeatherInfo } from './service.mjs';
 
 /** @type {StorageKey} **/
 const storageKey = {
@@ -95,48 +86,16 @@ class App extends Component {
 
   updateWeather() {
     const { city, country, unit } = this.state;
-    const url = weatherApiUrl(city, country);
-    fetch(url)
-      .then(response => {
-        return response.json();
+    fetchWeatherInfo(city, country)
+      .then(/** @type {WeatherInfo} **/ data => {
+        const { temperature, forecast } = data;
+        this.setState({
+          temperature: convertKelvinTo(temperature, unit),
+          forecast
+        });
       })
-      .then(json => {
-        console.log(json);
-        const { /** @type {number|string} **/ cod } = json;
-        const code = toInt(cod);
-        if (code === 200) {
-          const { main, weather } = json;
-          if (typeof main !== 'undefined') {
-            this.setState({
-              temperature: convertKelvinTo(main.temp, unit),
-            });
-          }
-
-          if (typeof weather !== 'undefined' && weather.length > 0) {
-            this.setState({
-              forecast: weather[0].description || undefined,
-            });
-          }
-        } else {
-          throw Error(code.toString());
-        }
-
-      })
-      .catch(err => {
-        const { /** @type {string} **/ message } = err;
-        const code = toInt(message);
-        if (code === 500) {
-          // retry
-          setTimeout(() => {
-            this.updateWeather();
-          }, 2000);
-        } else if (code === 404) {
-          // city not found
-          console.log('city not found');
-          this.openSettingsPanel();
-        } else {
-          console.log('unknown error, code: ' + code);
-        }
+      .catch(/** @type {number} **/ errCode => {
+        console.log('error: ', errCode);
       });
   }
 }

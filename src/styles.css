@@ -102,16 +102,17 @@ body {
   position: absolute;
   margin: 0;
   left: 50%;
-  top: 50%;
+  top: 80%;
+  transform: translate(-50%, -80%);
   width: 100%;
-  font-family: 'Fredoka One', sans-serif;
-  font-size: 5rem;
-  transform: translate(-50%, -50%);
+  font-family: 'Exo', sans-serif;
+  font-size: 4rem;
   text-shadow: 1px 1px 10px #333;
-  text-transform: uppercase;
+  text-transform: capitalize;
   text-align: center;
   letter-spacing: 0.05em;
   cursor: default;
+  opacity: 0.9;
   z-index: 1;
 }
 
@@ -167,7 +168,7 @@ body {
   }
 
   .does-it-suck {
-    font-size: 4rem;
+    font-size: 3rem;
   }
 }
 
@@ -228,7 +229,8 @@ body {
   }
 
   .does-it-suck {
-    transform: translate(-50%, 100%);
-    font-size: 3rem;
+    top: 80%;
+    transform: translate(-50%, -80%);
+    font-size: 2rem;
   }
 }
