@@ -156,7 +156,7 @@ body {
 }
 
 .settings-panel-content {
-  background-color: rgba(53, 29, 105, 0.5);
+  background-color: rgba(53, 29, 105, 0.9);
   padding: 2em;
   position: fixed;
   width: 100%;
@@ -175,8 +175,9 @@ body {
 }
 
 .blur {
-  filter: blur(6px);
-  transition: 0.5s 0.1s linear;
+  /** Safari crashes when blur filter is applied */
+  /*filter: blur(6px);
+  transition: 0.5s 0.1s linear;*/
 }
 
 @media screen and (max-width: 700px) {
