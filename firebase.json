@@ -5,6 +5,43 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "headers": [
+      {
+        "source": "**",
+        "headers": [
+          {"key": "X-Frame-Options", "value": "SAMEORIGIN"},
+          {"key": "X-Content-Type-Options", "value": "nosniff"},
+          {"key": "X-UA-Compatible", "value": "ie=edge"},
+          {"key": "X-XSS-Protection", "value": "1; mode=block"}
+        ]
+      },
+      {
+        "source": "**/*.@(jpg|jpeg|gif|png|webp|ogg|mp3|js|css|woff|woff2)",
+        "headers": [
+          {"key": "Cache-Control", "value": "max-age=31556926, public"}
+        ]
+      },
+      {
+        "source": "**/*.@(json|xml|mjs)",
+        "headers": [
+          {"key": "Cache-Control", "value": "max-age=3600, public"}
+        ]
+      },
+      {
+        "source": "**/*.@(html|htm|appcache|webapp)",
+        "headers": [
+          {"key": "Cache-Control", "value": "max-age=1, private, no-store, no-cache, must-revalidate"}
+        ]
+      }
+    ],
+
+    "redirects": [
+      {
+        "source": "**/index.html",
+        "destination": "/",
+        "type": 301
+      }
     ]
   }
 }
