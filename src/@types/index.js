@@ -14,8 +14,8 @@
 
 /**
  * @typedef {Readonly<object>} WeatherInfo
- * @property {number|undefined} temperature in Kelvin
- * @property {string|undefined} forecast
- * @property {string|undefined} country
- * @property {string|undefined} city
+ * @property {number} [temperature] in Kelvin
+ * @property {string} [forecast]
+ * @property {string} [country]
+ * @property {string} [city]
  */

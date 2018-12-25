@@ -15,13 +15,12 @@ class App extends Component {
   componentDidMount() {
     const urlParam = new URLSearchParams(location.search);
     const city = urlParam.get('city') || localStorage.getItem(storageKey.CITY) || 'London';
-    const country = urlParam.get('country') || '';
     const unit = (urlParam.get('unit') || localStorage.getItem(storageKey.UNIT) || 'C').toUpperCase();
 
     this.setState({
       city,
-      country,
       unit,
+      country: '',
       temperature: undefined,
       forecast: undefined,
       showSettingsPanel: false,

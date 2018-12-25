@@ -292,6 +292,8 @@ export class SettingsPanel extends Component {
               <option value="Sanaá" />
               <option value="Lusaka" />
               <option value="Harare" />
+              <option value="Vancouver, CA" />
+              <option value="Vancouver, US" />
             </datalist>
           </div>
           
