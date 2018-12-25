@@ -48,7 +48,7 @@ export class SettingsPanel extends Component {
               <option value="Kabul" />
               <option value="Episkopi Cantonment" />
               <option value="Tirana" />
-              <option value="Algiers" />
+              <option value="Algiers, US" />
               <option value="Pago Pago" />
               <option value="Andorra la Vella" />
               <option value="Luanda" />

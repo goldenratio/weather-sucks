@@ -63,7 +63,7 @@ export const DoesItSuck = ({ value, blur }) => {
 };
 
 /**
- * @param {() => void} onClick
+ * @param {function() : void} onClick
  */
 export const SettingsIcon = ({ onClick }) => {
   return html`
