@@ -2,6 +2,10 @@
 Our Earth needs yet another Weather App.
 Demo: https://doesweathersuck.com/
 
+City param in URL,
+- https://doesweathersuck.com/?city=london
+- https://doesweathersuck.com/?city=vancouver,CA
+- https://doesweathersuck.com/?city=vancouver,US
 
 Proof of Concept app, to showcase:
 - no transpilers needed to write modern javascript
