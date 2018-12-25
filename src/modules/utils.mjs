@@ -154,3 +154,10 @@ export function isDay() {
 export function stringContains(str, list) {
   return list.some(entry => str.includes(entry));
 }
+
+/**
+ * @return {void}
+ */
+export function noop() {
+  //
+}

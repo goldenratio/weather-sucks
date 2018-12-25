@@ -1,7 +1,7 @@
 import { html, Component, render } from './libs/preact.mjs';
 import { Background, CityHeader, DoesItSuck, SettingsIcon, ForecastInfo, Temperature } from './components/weather.component.mjs';
 import { SettingsPanel } from './components/settings-panel.component.mjs';
-import { convertKelvinTo } from './modules/utils.mjs';
+import { convertKelvinTo, noop } from './modules/utils.mjs';
 import { fetchWeatherInfo } from './modules/service.mjs';
 import { autoUpdate } from './modules/auto-update.mjs';
 
@@ -12,6 +12,11 @@ const storageKey = {
 };
 
 class App extends Component {
+
+  constructor() {
+    super();
+    this.autoUpdateUnsub = noop;
+  }
 
   componentDidMount() {
     const urlParam = new URLSearchParams(location.search);
@@ -27,10 +32,14 @@ class App extends Component {
       doesItSuck: false
     });
 
-    autoUpdate(() => {
+    this.autoUpdateUnsub = autoUpdate(() => {
       this.updateWeather();
     });
     this.updateWeather();
+  }
+
+  componentWillUnmount() {
+    this.autoUpdateUnsub();
   }
 
   render({}, { showSettingsPanel, city, doesItSuck, temperature, unit, forecast }) {
