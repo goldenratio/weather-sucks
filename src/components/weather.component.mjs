@@ -43,7 +43,14 @@ export const Background = ({ forecast }) => {
   if (forecast === undefined) {
     return html``;
   }
-  return html`<div class=${`background background-${getBackground(forecast)}`}></div>`;
+
+  const backgroundImageName = getBackground(forecast);
+  const bgStyle = `
+    background: rgb(98, 88, 166) url(assets/backgrounds/${backgroundImageName}.jpg) no-repeat;
+    background-size: cover;
+    background-blend-mode: multiply;
+  `;
+  return html`<div class="background" style=${bgStyle}></div>`;
 };
 
 /**

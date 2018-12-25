@@ -26,48 +26,6 @@ body {
   z-index: 0;
 }
 
-.background-rain {
-  background: rgb(98, 88, 166) url(assets/backgrounds/rain.jpg) no-repeat;
-  background-size: cover;
-  background-blend-mode: multiply;
-}
-
-.background-snow {
-  background: rgb(98, 88, 166) url(assets/backgrounds/snow.jpg) no-repeat;
-  background-size: cover;
-  background-blend-mode: multiply;
-}
-
-.background-clear-day {
-  background: rgb(98, 88, 166) url(assets/backgrounds/clear-day.jpg) no-repeat;
-  background-size: cover;
-  background-blend-mode: multiply;
-}
-
-.background-clear-night {
-  background: rgb(98, 88, 166) url(assets/backgrounds/clear-night.jpg) no-repeat;
-  background-size: cover;
-  background-blend-mode: multiply;
-}
-
-.background-mist {
-  background: rgb(98, 88, 166) url(assets/backgrounds/mist.jpg) no-repeat;
-  background-size: cover;
-  background-blend-mode: multiply;
-}
-
-.background-clouds {
-  background: rgb(98, 88, 166) url(assets/backgrounds/clouds.jpg) no-repeat;
-  background-size: cover;
-  background-blend-mode: multiply;
-}
-
-.background-default {
-  background: rgb(98, 88, 166) url(assets/backgrounds/default.jpg) no-repeat;
-  background-size: cover;
-  background-blend-mode: multiply;
-}
-
 .weather-container {
   position: absolute;
   width: 100%;

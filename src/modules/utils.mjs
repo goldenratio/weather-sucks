@@ -5,6 +5,10 @@
 export function getForecastIcon(forecast) {
   const key = forecast.toLowerCase();
 
+  if (stringContains(key, ['mist', 'dust', 'haze'])) {
+    return '';
+  }
+
   if (key.indexOf('clear') >= 0) {
     const day = isDay();
     return day ? '' : '';
@@ -42,10 +46,6 @@ export function getForecastIcon(forecast) {
     return '';
   }
 
-  if (key.indexOf('mist') >= 0 || key.indexOf('dust') >= 0 || key.indexOf('haze') >= 0) {
-    return '';
-  }
-
   if (key.indexOf('fire') >= 0) {
     return '';
   }
@@ -72,23 +72,27 @@ export function getForecastIcon(forecast) {
 export function getBackground(forecast) {
   const key = forecast.toLowerCase();
 
-  if (key.indexOf('mist') >= 0 || key.indexOf('haze') >= 0 || key.indexOf('smoke') >= 0 || key.indexOf('fog') >= 0) {
+  if (stringContains(key, ['mist', 'haze', 'smoke', 'fog'])) {
     return 'mist';
   }
 
-  if (key.indexOf('cloud') >= 0) {
+  if (stringContains(key, ['cloud'])) {
     return 'clouds';
   }
 
-  if (key.indexOf('rain') >= 0) {
+  if (stringContains(key, ['rain'])) {
     return 'rain';
   }
 
-  if (key.indexOf('snow') >= 0) {
+  if (stringContains(key, ['drizzle'])) {
+    return 'drizzle';
+  }
+
+  if (stringContains(key, ['snow'])) {
     return 'snow';
   }
 
-  if (key.indexOf('clear') >= 0) {
+  if (stringContains(key, ['clear'])) {
     const day = isDay();
     return day ? 'clear-day' : 'clear-night';
   }
@@ -140,4 +144,13 @@ export function toInt(value) {
 export function isDay() {
   const hours = new Date().getHours();
   return hours > 6 && hours < 18;
+}
+
+/**
+ * @param {string} str
+ * @param {Array<string>} list
+ * @returns {boolean}
+ */
+export function stringContains(str, list) {
+  return list.some(entry => str.includes(entry));
 }
