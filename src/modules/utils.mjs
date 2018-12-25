@@ -9,6 +9,10 @@ export function getForecastIcon(forecast) {
     return '';
   }
 
+  if (stringContains(key, ['sleet'])) {
+    return '';
+  }
+
   if (key.indexOf('clear') >= 0) {
     const day = isDay();
     return day ? '' : '';
