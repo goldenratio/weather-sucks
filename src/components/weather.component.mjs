@@ -1,13 +1,11 @@
 import { html } from '../libs/preact.mjs';
-import { getForecastIcon, getBackground } from '../utils.mjs';
+import { getForecastIcon, getBackground } from '../modules/utils.mjs';
 
 /**
  * @param {string} city
- * @param {string} country
  */
-export const CityHeader = ({ city, country }) => {
-  const info = !country ? `${city}` : `${city}, ${country}`;
-  return html`<div class="city-title">${info}</div>`;
+export const CityHeader = ({ city }) => {
+  return html`<div class="city-title">${city}</div>`;
 };
 
 /**

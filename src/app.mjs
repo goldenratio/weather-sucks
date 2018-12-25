@@ -1,8 +1,9 @@
 import { html, Component, render } from './libs/preact.mjs';
 import { Background, CityHeader, DoesItSuck, SettingsIcon, ForecastInfo, Temperature } from './components/weather.component.mjs';
 import { SettingsPanel } from './components/settings-panel.component.mjs';
-import { convertKelvinTo } from './utils.mjs';
-import { fetchWeatherInfo } from './service.mjs';
+import { convertKelvinTo } from './modules/utils.mjs';
+import { fetchWeatherInfo } from './modules/service.mjs';
+import { autoUpdate } from './modules/auto-update.mjs';
 
 /** @type {StorageKey} **/
 const storageKey = {
@@ -20,30 +21,19 @@ class App extends Component {
     this.setState({
       city,
       unit,
-      country: '',
       temperature: undefined,
       forecast: undefined,
       showSettingsPanel: false,
-      doesItSuck: true
+      doesItSuck: false
     });
 
-    /** @type {number|undefined} **/
-    this.lastUpdated = undefined;
-
-    window.addEventListener('focus', () => {
-      if (this.lastUpdated === undefined) {
-        return;
-      }
-      const timeDiff = Date.now() - this.lastUpdated;
-      // 120000 = 2 minutes
-      if (timeDiff > 120000) {
-        this.updateWeather();
-      }
+    autoUpdate(() => {
+      this.updateWeather();
     });
     this.updateWeather();
   }
 
-  render({}, { showSettingsPanel, city, country, doesItSuck, temperature, unit, forecast }) {
+  render({}, { showSettingsPanel, city, doesItSuck, temperature, unit, forecast }) {
     if (showSettingsPanel === undefined) {
       return html``;
     }
@@ -55,13 +45,13 @@ class App extends Component {
         ${
           !showSettingsPanel ? 
             html`` : 
-            html`<${SettingsPanel} unit="${unit}" city="${city}" onCloseClick=${() => this.closeSettingsPanel()} onSaveClick=${(unit, city) => this.saveSettings(unit, city)} />`
+            html`<${SettingsPanel} city="${city}" unit="${unit}" onCloseClick=${() => this.closeSettingsPanel()} onSaveClick=${(city, unit) => this.saveSettings(city, unit)} />`
         }
         <${Background} forecast="${forecast}" />
         <div class=${`weather-container ${blurClass}`}>
           <div style="padding: 1.4em;">
             <${SettingsIcon} onClick="${() => this.openSettingsPanel()}" /> 
-            <${CityHeader} city="${city}" country="${country}" />
+            <${CityHeader} city="${city}" />
             <${Temperature} value="${temperature}" unit="${unit}" />
             <${ForecastInfo} description="${forecast}" />
           </div>
@@ -112,10 +102,9 @@ class App extends Component {
         this.setState({
           temperature: convertKelvinTo(temperature, unit),
           forecast,
-          city,
-          country
+          city: `${city}, ${country}`,
+          doesItSuck: true
         });
-        this.lastUpdated = Date.now();
       })
       .catch(/** @type {number} **/ errCode => {
         console.log('error: ', errCode);
