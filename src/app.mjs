@@ -79,6 +79,10 @@ class App extends Component {
     this.setState({ showSettingsPanel: false });
   }
 
+  /**
+   * @param {string} city
+   * @param {Unit} unit
+   */
   saveSettings(city, unit) {
     if (city) {
       localStorage.setItem(storageKey.CITY, city);
