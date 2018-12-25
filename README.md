@@ -6,8 +6,7 @@ Demo: https://doesweathersuck.com/
 Proof of Concept app, to showcase:
 - no transpilers needed to write modern javascript
 - Making use of `.mjs` - new javascript file extension
-- I don't recommend such approach for production. Use static type checkers like TypeScript. 
-If you are phobic to them, get your head out of your ass. 
+- I don't recommend such approach for production. Use static type checkers like TypeScript.
 
 App inspiration:
 - http://ootsi.de/
