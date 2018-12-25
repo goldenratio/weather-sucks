@@ -92,6 +92,10 @@ export function getBackground(forecast) {
     return 'snow';
   }
 
+  if (stringContains(key, ['sleet'])) {
+    return 'sleet';
+  }
+
   if (stringContains(key, ['clear'])) {
     const day = isDay();
     return day ? 'clear-day' : 'clear-night';
