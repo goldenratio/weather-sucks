@@ -1,3 +1,7 @@
+/**
+ * @param {() => void} callback
+ * @returns {() => void} unsub
+ */
 export function autoUpdate(callback) {
   const updateIntervalMs = 600000; // 10 minutes
   const idleMs = 240000; // 120000 = 2 minutes
