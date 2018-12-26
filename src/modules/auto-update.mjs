@@ -20,10 +20,16 @@ export function autoUpdate(callback) {
     }
   };
 
+  const online = () => {
+    callback();
+  };
+
   window.addEventListener('focus', onFocus);
+  window.addEventListener('online', online);
 
   return () => {
     window.clearInterval(timerId);
     window.removeEventListener('focus', onFocus);
+    window.removeEventListener('online', online);
   };
 }
