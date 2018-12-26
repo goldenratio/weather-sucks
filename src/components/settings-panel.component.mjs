@@ -1,5 +1,8 @@
 import { html, Component } from '../libs/preact.mjs';
 
+const ENTER = 13;
+const ESC = 27;
+
 export class SettingsPanel extends Component {
 
   componentDidMount() {
@@ -9,23 +12,23 @@ export class SettingsPanel extends Component {
       unit
     });
 
-    this.onKeyUpBind = this.onKeyUp.bind(this);
-    document.addEventListener('keyup', this.onKeyUpBind);
+    this.onKeyUp = this.onKeyUp.bind(this);
+    document.addEventListener('keyup', this.onKeyUp);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keyup', this.onKeyUpBind);
+    document.removeEventListener('keyup', this.onKeyUp);
   }
 
   onKeyUp(event) {
     const { keyCode } = event;
     const { onCloseClick, onSaveClick } = this.props;
 
-    if (keyCode === 27) {
+    if (keyCode === ESC) {
       onCloseClick();
-    } else if(keyCode === 13) {
+    } else if(keyCode === ENTER) {
       const { city, unit } = this.state;
-      onSaveClick(city, unit);
+      onSaveClick(city.trim(), unit);
     }
   }
 
@@ -42,7 +45,7 @@ export class SettingsPanel extends Component {
           </div>
           
           <div>
-            <input type="text" list="cities" placeholder="City" value="${city}" oninput="${e => this.setState({ city: e.target.value.trim() })}" />
+            <input type="text" list="cities" placeholder="City" value="${city}" oninput="${e => this.setState({ city: e.target.value })}" />
             <datalist id="cities">
               <option value="Sukhumi" />
               <option value="Kabul" />
@@ -298,7 +301,7 @@ export class SettingsPanel extends Component {
           </div>
           
           <div>
-            <input type="button" value="Save" onclick="${() => onSaveClick(city, unit)}" />
+            <input type="button" value="Save" onclick="${() => onSaveClick(city.trim(), unit)}" />
           </div>
         
         </div>
