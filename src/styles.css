@@ -125,6 +125,7 @@ body {
   box-shadow: 0px 7px 32px -9px rgba(0, 0, 0, 0.7);
   padding: 2em;
   width: 100%;
+  position: fixed;
   animation-name: settings-panel-content-animation;
   animation-duration: 0.3s;
   animation-timing-function: ease-out;
@@ -149,7 +150,7 @@ body {
 
 .blur {
   filter: blur(6px);
-  transition: 0.5s 0.1s linear;
+  transition: 0.3s 0.3s linear;
 }
 
 @media screen and (max-width: 700px) {
