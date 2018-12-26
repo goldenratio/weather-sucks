@@ -4,9 +4,8 @@ import { getForecastIcon, getBackground } from '../modules/utils.mjs';
 /**
  * @param {string} city
  */
-export const CityHeader = ({ city }) => {
-  return html`<div class="city-title">${city}</div>`;
-};
+export const CityHeader = ({ city }) => html`<div class="city-title">${city}</div>`;
+
 
 /**
  * @param {string} value
