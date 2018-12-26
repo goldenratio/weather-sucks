@@ -122,6 +122,7 @@ body {
 
 .settings-panel-content {
   background-color: rgba(53, 29, 105, 0.6);
+  box-shadow: 0px 7px 32px -9px rgba(0, 0, 0, 0.7);
   padding: 2em;
   width: 100%;
   animation-name: settings-panel-content-animation;
