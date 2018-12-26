@@ -1,6 +1,6 @@
 {
-  "name": "Weather",
-  "short_name": "Weather",
+  "name": "Weather App",
+  "short_name": "Weather App",
   "theme_color": "#0b233b",
   "background_color": "#0b233b",
   "display": "fullscreen",

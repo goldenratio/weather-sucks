@@ -6,7 +6,6 @@ import { getForecastIcon, getBackground } from '../modules/utils.mjs';
  */
 export const CityHeader = ({ city }) => html`<div class="city-title">${city}</div>`;
 
-
 /**
  * @param {string} value
  * @param {string} unit
