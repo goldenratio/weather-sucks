@@ -23,7 +23,7 @@
         ]
       },
       {
-        "source": "**/*.@(json|xml|mjs)",
+        "source": "**/*.@(json|xml|css|mjs|js)",
         "headers": [
           {"key": "Cache-Control", "value": "max-age=3600, public"}
         ]
