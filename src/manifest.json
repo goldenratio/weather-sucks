@@ -2,7 +2,7 @@
   "name": "Weather",
   "short_name": "Weather",
   "theme_color": "#0b233b",
-  "background_color": "#000000",
+  "background_color": "#0b233b",
   "display": "fullscreen",
   "orientation": "portrait",
   "scope": "/",
