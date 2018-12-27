@@ -1,5 +1,12 @@
 import { html, Component, render } from './libs/preact.mjs';
-import { Background, CityHeader, DoesItSuck, SettingsIcon, ForecastInfo, Temperature } from './components/weather.component.mjs';
+import {
+  Background,
+  CityHeader,
+  DoesItSuck,
+  SettingsIcon,
+  ForecastInfo,
+  Temperature
+} from './components/weather.component.mjs';
 import { SettingsPanel } from './components/settings-panel.component.mjs';
 import { convertKelvinTo, noop } from './modules/utils.mjs';
 import { fetchWeatherInfo } from './modules/service.mjs';
@@ -52,10 +59,10 @@ class App extends Component {
     return html`
       <div class="app">
         ${
-          !showSettingsPanel ? 
-            html`` : 
-            html`<${SettingsPanel} city="${city}" unit="${unit}" onCloseClick=${() => this.closeSettingsPanel()} onSaveClick=${(city, unit) => this.saveSettings(city, unit)} />`
-        }
+      !showSettingsPanel ?
+        html`` :
+        html`<${SettingsPanel} city="${city}" unit="${unit}" onCloseClick=${() => this.closeSettingsPanel()} onSaveClick=${(city, unit) => this.saveSettings(city, unit)} />`
+      }
         <${Background} forecast="${forecast}" />
         <div class=${`weather-container ${blurClass}`}>
           <div style="padding: 1.4em;">
@@ -106,7 +113,7 @@ class App extends Component {
   updateWeather() {
     const { city, unit } = this.state;
     fetchWeatherInfo(city)
-      .then(/** @type {WeatherInfo} **/ data => {
+      .then(/** @type {WeatherInfo} **/data => {
         const { temperature, forecast, city, country } = data;
         this.setState({
           temperature: convertKelvinTo(temperature, unit),
@@ -115,7 +122,7 @@ class App extends Component {
           doesItSuck: true
         });
       })
-      .catch(/** @type {number} **/ errCode => {
+      .catch(/** @type {number} **/errCode => {
         console.log('error: ', errCode);
         this.setState({
           temperature: undefined,
@@ -130,11 +137,62 @@ class App extends Component {
   }
 }
 
+/**
+ * https://github.com/GoogleChrome/workbox/issues/1120
+ * @param {ServiceWorkerRegistration} registration
+ * @param {function() : void} callback
+ */
+function onNewServiceWorker(registration, callback) {
+  if (registration.waiting) {
+    // SW is waiting to activate. Can occur if multiple clients open and
+    // one of the clients is refreshed.
+    return callback();
+  }
+
+  const listenInstalledStateChange = () => {
+    registration.installing.addEventListener('statechange', event => {
+      if (event.target.state === 'installed') {
+        // A new service worker is available, inform the user
+        callback();
+      }
+    });
+  };
+
+  if (registration.installing) {
+    return listenInstalledStateChange();
+  }
+
+  // We are currently controlled so a new SW may be found...
+  // Add a listener in case a new SW is found,
+  registration.addEventListener('updatefound', listenInstalledStateChange);
+}
+
 window.onload = () => {
   console.log('Created by: @karthikvj https://twitter.com/karthikvj');
   console.log('Source: https://github.com/goldenratio/weather-sucks');
+
+  navigator.serviceWorker.addEventListener('message', (event) => {
+    if (!event || !event.data) {
+      return;
+    }
+    switch (event.data) {
+      case 'reload-window':
+        window.location.reload();
+        break;
+    }
+  });
+
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./service-worker.js');
+    navigator.serviceWorker.register('./service-worker.js')
+      .then(/** @type {ServiceWorkerRegistration} **/registration => {
+        onNewServiceWorker(registration, () => {
+          console.log('new version available');
+          // reload window
+          if (registration.waiting) {
+            registration.waiting.postMessage('force-activate');
+          }
+        });
+      });
   }
   render(html`<${App} />`, document.body);
 };

@@ -33,6 +33,12 @@
         "headers": [
           {"key": "Cache-Control", "value": "max-age=1, private, no-store, no-cache, must-revalidate"}
         ]
+      },
+      {
+        "source": "**/*service-worker.@(js|mjs)",
+        "headers": [
+          {"key": "Cache-Control", "value": "max-age=1, private, no-store, no-cache, must-revalidate"}
+        ]
       }
     ],
 
