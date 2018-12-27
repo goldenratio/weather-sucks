@@ -6,12 +6,10 @@ export function initServiceWorkers(newVersionInstalledCallback) {
   if (!serviceWorkerSupported) {
     return;
   }
-  const { serviceWorker } = navigator;
-  serviceWorker.addEventListener('message', (event) => {
-    if (!event || !event.data) {
-      return;
-    }
-    switch (event.data) {
+  const { /** @type {ServiceWorkerContainer} **/serviceWorker } = navigator;
+  serviceWorker.addEventListener('message', /** @type {MessageEvent} **/event => {
+    const { /** @type {string} **/data } = event;
+    switch (data) {
       case 'new-version-installed':
         newVersionInstalledCallback();
         break;
@@ -41,8 +39,9 @@ function onNewServiceWorker(registration, callback) {
   }
 
   const listenInstalledStateChange = () => {
-    registration.installing.addEventListener('statechange', event => {
-      if (event.target.state === 'installed') {
+    registration.installing.addEventListener('statechange', /** @type {Event} **/event => {
+      const { /** @type {ServiceWorker} **/target } = event;
+      if (target.state === 'installed') {
         // A new service worker is available, inform the user
         callback();
       }
