@@ -44,7 +44,7 @@ export const Background = ({ forecast }) => {
 
   const backgroundImageName = getBackground(forecast);
   const bgStyle = `
-    background: rgb(98, 88, 166) url(assets/backgrounds/${backgroundImageName}.jpg) no-repeat;
+    background: rgb(98, 88, 166) url(./assets/backgrounds/${backgroundImageName}.jpg) no-repeat;
     background-size: cover;
     background-blend-mode: multiply;
   `;

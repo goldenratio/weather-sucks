@@ -1,4 +1,7 @@
 .idea
+.firebase
+node_modules
+
 *.iml
 *.log
 *.cache
