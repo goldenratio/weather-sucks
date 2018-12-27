@@ -133,5 +133,8 @@ class App extends Component {
 window.onload = () => {
   console.log('Created by: @karthikvj https://twitter.com/karthikvj');
   console.log('Source: https://github.com/goldenratio/weather-sucks');
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./service-worker.js');
+  }
   render(html`<${App} />`, document.body);
 };
