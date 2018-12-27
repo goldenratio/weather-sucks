@@ -11,6 +11,7 @@ import { SettingsPanel } from './components/settings-panel.component.mjs';
 import { convertKelvinTo, noop } from './modules/utils.mjs';
 import { fetchWeatherInfo } from './modules/service.mjs';
 import { autoUpdate } from './modules/auto-update.mjs';
+import { initServiceWorkers } from './modules/sw-utils.mjs';
 
 /** @type {StorageKey} **/
 const storageKey = {
@@ -137,62 +138,13 @@ class App extends Component {
   }
 }
 
-/**
- * https://github.com/GoogleChrome/workbox/issues/1120
- * @param {ServiceWorkerRegistration} registration
- * @param {function() : void} callback
- */
-function onNewServiceWorker(registration, callback) {
-  if (registration.waiting) {
-    // SW is waiting to activate. Can occur if multiple clients open and
-    // one of the clients is refreshed.
-    return callback();
-  }
-
-  const listenInstalledStateChange = () => {
-    registration.installing.addEventListener('statechange', event => {
-      if (event.target.state === 'installed') {
-        // A new service worker is available, inform the user
-        callback();
-      }
-    });
-  };
-
-  if (registration.installing) {
-    return listenInstalledStateChange();
-  }
-
-  // We are currently controlled so a new SW may be found...
-  // Add a listener in case a new SW is found,
-  registration.addEventListener('updatefound', listenInstalledStateChange);
-}
-
 window.onload = () => {
   console.log('Created by: @karthikvj https://twitter.com/karthikvj');
   console.log('Source: https://github.com/goldenratio/weather-sucks');
 
-  navigator.serviceWorker.addEventListener('message', (event) => {
-    if (!event || !event.data) {
-      return;
-    }
-    switch (event.data) {
-      case 'reload-window':
-        window.location.reload();
-        break;
-    }
+  initServiceWorkers(() => {
+    console.log('new version available');
+    window.location.reload();
   });
-
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./service-worker.js')
-      .then(/** @type {ServiceWorkerRegistration} **/registration => {
-        onNewServiceWorker(registration, () => {
-          console.log('new version available');
-          // reload window
-          if (registration.waiting) {
-            registration.waiting.postMessage('force-activate');
-          }
-        });
-      });
-  }
   render(html`<${App} />`, document.body);
 };

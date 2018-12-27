@@ -1,4 +1,4 @@
-const version = '1.0.0'; // version needs to be updated manually for now
+const version = '2.0.0'; // version needs to be updated manually for now
 const preCacheName = `weather-sucks-precache-${version}`;
 const runtimeCacheName = `weather-sucks-runtimeCache-${version}`;
 
@@ -67,15 +67,16 @@ self.addEventListener('message', (event) => {
   if (!event || !event.data) {
     return;
   }
-
   switch (event.data) {
     case 'force-activate':
       self.skipWaiting();
-      self.clients.claim();
-      self.clients.matchAll()
-        .then(clients => {
-          clients.forEach(client => client.postMessage('reload-window'));
-        });
+      if (self.clients) {
+        self.clients.claim();
+        self.clients.matchAll()
+          .then(clients => {
+            clients.forEach(client => client.postMessage('new-version-installed'));
+          });
+      }
       break;
     default:
       // NOOP
