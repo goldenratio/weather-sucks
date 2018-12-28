@@ -1,14 +1,16 @@
-import { html } from '../libs/preact.mjs';
-import { getForecastIcon, getBackground } from '../modules/utils.mjs';
+import { html } from '../libs/preact.js';
+import { getForecastIcon, getBackground } from '../modules/utils.js';
 
 /**
- * @param {string} city
+ * @param {object} param
+ * @property {string} city
  */
 export const CityHeader = ({ city }) => html`<div class="city-title">${city}</div>`;
 
 /**
- * @param {string} value
- * @param {string} unit
+ * @param {object} param
+ * @property {string} value
+ * @property {string} unit
  */
 export const Temperature = ({ value, unit }) => {
   return value === undefined ?
@@ -21,7 +23,8 @@ export const Temperature = ({ value, unit }) => {
 };
 
 /**
- * @param {string} forecast
+ * @param {object} param
+ * @property {string} forecast
  */
 export const ForecastInfo = ({ forecast }) => {
   return forecast === undefined ?
@@ -35,7 +38,8 @@ export const ForecastInfo = ({ forecast }) => {
 };
 
 /**
- * @param {string} forecast
+ * @param {object} param
+ * @property {string} forecast
  */
 export const Background = ({ forecast }) => {
   if (forecast === undefined) {
@@ -52,8 +56,9 @@ export const Background = ({ forecast }) => {
 };
 
 /**
- * @param {boolean} value
- * @param {boolean} blur
+ * @param {object} param
+ * @property {boolean} value
+ * @property {boolean} blur
  */
 export const DoesItSuck = ({ value, blur }) => {
   const blurClass = blur ? 'blur' : 'no-blur';
@@ -61,7 +66,8 @@ export const DoesItSuck = ({ value, blur }) => {
 };
 
 /**
- * @param {function() : void} onClick
+ * @param {object} param
+ * @property {function() : void} onClick
  */
 export const SettingsIcon = ({ onClick }) => {
   return html`

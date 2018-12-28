@@ -1,13 +1,13 @@
 /**
- * @typedef {('C' || 'F')} Unit
+ * @typedef {('C' | 'F')} Unit
  */
 
 /**
- * @typedef {('rain' || 'drizzle' || 'snow' || 'sleet' || 'clear-day' || 'clear-night' || 'mist' || 'clouds' || 'default')} BackgroundType
+ * @typedef {('rain' | 'drizzle' | 'snow' | 'sleet' | 'clear-day' | 'clear-night' | 'mist' | 'clouds' | 'default')} BackgroundType
  */
 
 /**
- * @typedef {Readonly<object<string, string>>} StorageKey
+ * @typedef {Readonly<object>} StorageKey
  * @property {string} CITY
  * @property {string} UNIT
  */
@@ -18,4 +18,18 @@
  * @property {string} [forecast]
  * @property {string} [country]
  * @property {string} [city]
+ */
+
+/**
+ * @typedef {object} AppProps
+ */
+
+/**
+ * @typedef {object} AppState
+ * @property {string} city
+ * @property {Unit} unit
+ * @property {number} [temperature]
+ * @property {string} [forecast]
+ * @property {boolean} showSettingsPanel
+ * @property {boolean} doesItSuck
  */

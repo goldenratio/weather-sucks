@@ -1,0 +1,21 @@
+{
+  "name": "weather-sucks",
+  "version": "1.0.0",
+  "description": "Our Earth needs yet another Weather App",
+  "devDependencies": {
+    "typescript": "^3.2.2"
+  },
+  "scripts": {
+    "typecheck": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goldenratio/weather-sucks.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/goldenratio/weather-sucks/issues"
+  },
+  "homepage": "https://github.com/goldenratio/weather-sucks#readme"
+}

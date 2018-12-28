@@ -11,7 +11,8 @@ City and Unit param in URL,
 
 Proof of Concept app, to showcase:
 - no transpilers needed to write modern javascript
-- Making use of `.mjs` - new javascript file extension
+- Making use of script type `module`
+- Use TypeScript compiler to TypeCheck `.js` via JSDoc
 - I don't recommend such approach for production. Use static type checkers like TypeScript.
 
 App inspiration:

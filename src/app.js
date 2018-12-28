@@ -1,4 +1,4 @@
-import { html, Component, render } from './libs/preact.mjs';
+import { html, Component, render } from './libs/preact.js';
 import {
   Background,
   CityHeader,
@@ -6,12 +6,12 @@ import {
   SettingsIcon,
   ForecastInfo,
   Temperature
-} from './components/weather.component.mjs';
-import { SettingsPanel } from './components/settings-panel.component.mjs';
-import { convertKelvinTo, noop } from './modules/utils.mjs';
-import { fetchWeatherInfo } from './modules/service.mjs';
-import { autoUpdate } from './modules/auto-update.mjs';
-import { initServiceWorkers } from './modules/sw-utils.mjs';
+} from './components/weather.component.js';
+import { SettingsPanel } from './components/settings-panel.component.js';
+import { convertKelvinTo } from './modules/utils.js';
+import { fetchWeatherInfo } from './modules/service.js';
+import { autoUpdate } from './modules/auto-update.js';
+import { initServiceWorkers } from './modules/sw-utils.js';
 
 /** @type {StorageKey} **/
 const storageKey = {
@@ -19,12 +19,10 @@ const storageKey = {
   UNIT: 'weather-sucks.unit'
 };
 
+/**
+ * @extends {Component<AppProps, AppState>}
+ */
 class App extends Component {
-
-  constructor() {
-    super();
-    this.autoUpdateUnsub = noop;
-  }
 
   componentDidMount() {
     const urlParam = new URLSearchParams(location.search);
@@ -47,9 +45,15 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-    this.autoUpdateUnsub();
+    if (this.autoUpdateUnsub) {
+      this.autoUpdateUnsub();
+    }
   }
 
+  /**
+   * @param {AppProps} prop
+   * @param {AppState} state
+   */
   render({}, { showSettingsPanel, city, doesItSuck, temperature, unit, forecast }) {
     if (showSettingsPanel === undefined) {
       return html``;
@@ -59,11 +63,12 @@ class App extends Component {
 
     return html`
       <div class="app">
-        ${
-      !showSettingsPanel ?
-        html`` :
-        html`<${SettingsPanel} city="${city}" unit="${unit}" onCloseClick=${() => this.closeSettingsPanel()} onSaveClick=${(city, unit) => this.saveSettings(city, unit)} />`
-      }
+        ${!showSettingsPanel ?
+          html`` :
+          html`<${SettingsPanel} city="${city}" unit="${unit}" 
+              onCloseClick=${() => this.closeSettingsPanel()} 
+              onSaveClick=${(/** @type {string}**/city, /** @type {Unit}**/unit) => this.saveSettings(city, unit)} />`
+        }
         <${Background} forecast="${forecast}" />
         <div class=${`weather-container ${blurClass}`}>
           <div style="padding: 1.4em;">

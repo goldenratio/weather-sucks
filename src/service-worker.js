@@ -1,4 +1,5 @@
-const version = '6.0.0'; // version needs to be updated manually for now
+// @ts-nocheck
+const version = '7.0.0'; // version needs to be updated manually for now
 const projectName = 'weather-sucks';
 const preCacheName = `${projectName}-precache-${version}`;
 const runtimeCacheName = `${projectName}-runtimeCache-${version}`;
@@ -7,20 +8,24 @@ const cacheUrls = [
   './index.html',
   './', // Alias for index.html
   './style.css',
-  './app.mjs'
+  './app.js'
 ];
 
+/** @type {ServiceWorkerGlobalScope} **/
+const worker = self;
 // The install handler takes care of precaching the resources we always need.
-self.addEventListener('install', /** @type {ExtendableEvent} **/event => {
+worker.addEventListener('install', /** @type {ExtendableEvent} **/event => {
   event.waitUntil(
     caches.open(preCacheName)
       .then(cache => cache.addAll(cacheUrls))
-      .then(self.skipWaiting())
+      .then(() => {
+        return worker.skipWaiting();
+      })
   );
 });
 
 // The activate handler takes care of cleaning up old caches.
-self.addEventListener('activate', /** @type {ExtendableEvent} **/event => {
+worker.addEventListener('activate', /** @type {ExtendableEvent} **/event => {
   const currentCaches = [preCacheName, runtimeCacheName];
   event.waitUntil(
     caches.keys()
@@ -32,13 +37,13 @@ self.addEventListener('activate', /** @type {ExtendableEvent} **/event => {
           return caches.delete(cacheToDelete);
         }));
       })
-      .then(() => self.clients.claim())
+      .then(() => worker.clients.claim())
   );
 });
 
-self.addEventListener('fetch', /** @type {FetchEvent} **/event => {
+worker.addEventListener('fetch', /** @type {FetchEvent} **/event => {
   // ignore requests to OpenWeather API
-  const requestsFromApp = event.request.url.startsWith(self.location.origin);
+  const requestsFromApp = event.request.url.startsWith(worker.location.origin);
   if (!requestsFromApp) {
     return;
   }
@@ -64,14 +69,14 @@ self.addEventListener('fetch', /** @type {FetchEvent} **/event => {
 });
 
 // https://github.com/GoogleChrome/workbox/issues/1120
-self.addEventListener('message', /** @type {MessageEvent} **/event => {
+worker.addEventListener('message', /** @type {MessageEvent} **/event => {
   const { /** @type {string} **/data } = event;
   switch (data) {
     case 'force-activate':
-      self.skipWaiting();
-      if (self.clients) {
-        self.clients.claim();
-        self.clients.matchAll()
+      worker.skipWaiting();
+      if (worker.clients) {
+        worker.clients.claim();
+        worker.clients.matchAll()
           .then(clients => {
             clients.forEach(client => client.postMessage('new-version-installed'));
           });

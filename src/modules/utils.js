@@ -111,7 +111,7 @@ export function getBackground(forecast) {
  * @param {number} kelvin
  * @param {Unit} unit
  * @throws {Error}
- * @returns {number}
+ * @returns {number|undefined}
  */
 export function convertKelvinTo(kelvin, unit) {
   if (typeof kelvin !== 'number') {
@@ -147,7 +147,7 @@ export function toInt(value) {
 }
 
 /**
- * @param {string|boolean} value
+ * @param {string|boolean|null|undefined} value
  * @param {boolean} fallbackValue
  * @throws {Error}
  * @return {boolean}

@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "noEmit": true,
+    "allowJs": true,
+    "checkJs": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "esnext",
+    "baseUrl": ".",
+    "lib": [
+      "es5",
+      "es6",
+      "es7",
+      "esnext",
+      "dom",
+      "es2015.promise",
+      "es2015.core"
+    ],
+    "typeRoots": [
+      "node_modules/@types",
+      "./typings"
+    ],
+    "types": [
+
+    ]
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/libs/**/*"
+  ]
+}

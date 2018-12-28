@@ -1,12 +1,15 @@
-import { html, Component } from '../libs/preact.mjs';
+import { html, Component } from '../libs/preact.js';
 
 const ENTER = 13;
 const ESC = 27;
 
+/**
+ * @extends {Component<SettingsPanelProps, SettingsPanelState>}
+ */
 export class SettingsPanel extends Component {
 
   componentDidMount() {
-    const { city, unit } = this.props;
+    const { city, unit } = /** @type {SettingsPanelProps} **/(this.props);
     this.setState({
       city,
       unit
@@ -20,9 +23,12 @@ export class SettingsPanel extends Component {
     document.removeEventListener('keyup', this.onKeyUp);
   }
 
+  /**
+   * @param {KeyboardEvent} event
+   */
   onKeyUp(event) {
     const { keyCode } = event;
-    const { onCloseClick, onSaveClick } = this.props;
+    const { onCloseClick, onSaveClick } = /** @type {SettingsPanelProps} **/(this.props);
 
     if (keyCode === ESC) {
       onCloseClick();
@@ -32,20 +38,48 @@ export class SettingsPanel extends Component {
     }
   }
 
+  /**
+   * @param {Event} event
+   */
+  updateUnit(event) {
+    const { target } = event;
+    if (!target) {
+      return;
+    }
+    const { value } = /** @type {HTMLInputElement}**/(target);
+    this.setState({ unit: value })
+  }
+
+  /**
+   * @param {Event} event
+   */
+  updateCity(event) {
+    const { target } = event;
+    if (!target) {
+      return;
+    }
+    const { value } = /** @type {HTMLInputElement}**/(target);
+    this.setState({ city: value });
+  }
+
+  /**
+   * @param {SettingsPanelProps} props
+   * @param {SettingsPanelState} state
+   */
   render({ onCloseClick, onSaveClick }, { city, unit }) {
     return html`
       <div class="settings-panel" onclick="${() => onCloseClick()}">
-        <div class="settings-panel-content" onclick="${event => event.stopPropagation() }">
+        <div class="settings-panel-content" onclick="${(/** @type {Event}**/event) => event.stopPropagation()}">
                 
           <div>
-            <input id="c" name="unit" type="radio" value="C" checked=${ unit === 'C' } onchange="${ e => this.setState({ unit: e.target.value }) }" />
+            <input id="c" name="unit" type="radio" value="C" checked=${ unit === 'C' } onchange="${(/** @type {Event}**/e) => this.updateUnit(e)}" />
             <label for="c" style="padding-right: 1em;">° C</label>   
-            <input id="f" name="unit" type="radio" value="F" checked=${ unit === 'F' } onchange="${ e => this.setState({ unit: e.target.value }) }" />
+            <input id="f" name="unit" type="radio" value="F" checked=${ unit === 'F' } onchange="${(/** @type {Event}**/e) => this.updateUnit(e)}" />
             <label for="f">° F</label>        
           </div>
           
           <div>
-            <input type="text" list="cities" placeholder="City" value="${city}" oninput="${e => this.setState({ city: e.target.value })}" />
+            <input type="text" list="cities" placeholder="City" value="${city}" oninput="${(/** @type {Event}**/e) => this.updateCity(e)}" />
             <datalist id="cities">
               <option value="Sukhumi" />
               <option value="Kabul" />

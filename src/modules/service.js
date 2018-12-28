@@ -1,4 +1,4 @@
-import { toInt } from './utils.mjs';
+import { toInt } from './utils.js';
 
 /**
  * @param {string} city

@@ -1,4 +1,4 @@
-import { toBoolean } from './utils.mjs';
+import { toBoolean } from './utils.js';
 
 const firstRunKey = 'weather-sucks.first-run';
 
@@ -48,9 +48,18 @@ function onNewServiceWorker(registration, callback) {
   }
 
   const listenInstalledStateChange = () => {
-    registration.installing.addEventListener('statechange', /** @type {Event} **/event => {
-      const { /** @type {ServiceWorker} **/target } = event;
-      if (target.state === 'installed') {
+    const { installing } = registration;
+    if (!installing) {
+      return;
+    }
+
+    installing.addEventListener('statechange', /** @type {Event} **/event => {
+      const { target } = event;
+      if (!target) {
+        return;
+      }
+      const { state } = /** @type {ServiceWorker} **/(target);
+      if (state === 'installed') {
         // A new service worker is available, inform the user
         callback();
       }
