@@ -157,6 +157,11 @@ body {
   transition: 0.3s 0.3s linear;
 }
 
+.no-blur {
+  filter: blur(0px);
+  transition: 0.3s linear;
+}
+
 @media screen and (max-width: 700px) {
   .temperature .weather-digit {
     font-size: 6em;

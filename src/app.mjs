@@ -55,7 +55,7 @@ class App extends Component {
       return html``;
     }
 
-    const blurClass = showSettingsPanel ? 'blur' : '';
+    const blurClass = showSettingsPanel ? 'blur' : 'no-blur';
 
     return html`
       <div class="app">
@@ -70,7 +70,7 @@ class App extends Component {
             <${SettingsIcon} onClick="${() => this.openSettingsPanel()}" /> 
             <${CityHeader} city="${city}" />
             <${Temperature} value="${temperature}" unit="${unit}" />
-            <${ForecastInfo} description="${forecast}" />
+            <${ForecastInfo} forecast="${forecast}" />
           </div>
         </div>
         <${DoesItSuck} value=${doesItSuck} blur=${showSettingsPanel} />

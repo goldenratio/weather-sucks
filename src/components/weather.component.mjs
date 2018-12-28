@@ -21,15 +21,15 @@ export const Temperature = ({ value, unit }) => {
 };
 
 /**
- * @param {string} description
+ * @param {string} forecast
  */
-export const ForecastInfo = ({ description }) => {
-  return description === undefined ?
+export const ForecastInfo = ({ forecast }) => {
+  return forecast === undefined ?
     html`` :
     html`
       <div class="forecast">
-        <div class="icon">${getForecastIcon(description)}</div>
-        <div class="description">${description}</div>
+        <div class="icon">${getForecastIcon(forecast)}</div>
+        <div class="description">${forecast}</div>
       </div>
   `;
 };
@@ -56,7 +56,7 @@ export const Background = ({ forecast }) => {
  * @param {boolean} blur
  */
 export const DoesItSuck = ({ value, blur }) => {
-  const blurClass = blur ? 'blur' : '';
+  const blurClass = blur ? 'blur' : 'no-blur';
   return html`<h1 class=${`does-it-suck ${blurClass}`}>${value ? "Yes, It Sucks!" : ""}</h1>`;
 };
 
