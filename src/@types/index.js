@@ -7,13 +7,13 @@
  */
 
 /**
- * @typedef {Readonly<object>} StorageKey
+ * @typedef {object} StorageKey
  * @property {string} CITY
  * @property {string} UNIT
  */
 
 /**
- * @typedef {Readonly<object>} WeatherInfo
+ * @typedef {object} WeatherInfo
  * @property {number} [temperature] in Kelvin
  * @property {string} [forecast]
  * @property {string} [country]
