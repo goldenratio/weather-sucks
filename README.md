@@ -13,7 +13,8 @@ Proof of Concept app, to showcase:
 - no transpilers needed to write modern javascript
 - Making use of script type `module`
 - Use TypeScript compiler to TypeCheck `.js` via JSDoc
-- I don't recommend such approach for production. Use static type checkers like TypeScript.
+- I don't recommend such approach for production. Please directly use TypeScript (If you need type safety). 
+Even in such a small app, maintaining types in JSDoc is cumbersome.
 
 App inspiration:
 - http://ootsi.de/
