@@ -147,6 +147,35 @@ export function toInt(value) {
 }
 
 /**
+ * @param {string|boolean} value
+ * @param {boolean} fallbackValue
+ * @throws {Error}
+ * @return {boolean}
+ */
+export function toBoolean(value, fallbackValue) {
+  if (typeof value === 'boolean') {
+    return value;
+  }
+
+  if (typeof value === 'string') {
+    const lowercaseValue = value.toLowerCase();
+    if (lowercaseValue === 'true' || lowercaseValue === '1') {
+      return true;
+    } else if (lowercaseValue === 'false' || lowercaseValue === '0') {
+      return false;
+    } else {
+      return fallbackValue;
+    }
+  }
+
+  if (typeof value === 'undefined' || value === null) {
+    return fallbackValue;
+  }
+
+  throw Error('unknown type of value');
+}
+
+/**
  * @returns {boolean}
  */
 export function isDay() {

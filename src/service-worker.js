@@ -1,4 +1,4 @@
-const version = '5.0.0'; // version needs to be updated manually for now
+const version = '6.0.0'; // version needs to be updated manually for now
 const projectName = 'weather-sucks';
 const preCacheName = `${projectName}-precache-${version}`;
 const runtimeCacheName = `${projectName}-runtimeCache-${version}`;
