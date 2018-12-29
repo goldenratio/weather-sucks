@@ -12,10 +12,12 @@ export const AdditionalInfoPanel = ({ show, data }) => {
 
   return html`
     <div class=${`additional-info ${showClass}`}>
-      <div>Humidity: ${humidity}%</div>
-      <div>Pressure: ${pressure} hPa</div>
-      <div>Wind Speed: ${windSpeed} m/s</div>
-      <div>Wind Direction: ${windDirection}°</div>
+      <div style="padding: 1em;">
+        <div>Humidity: ${humidity}%</div>
+        <div>Pressure: ${pressure} hPa</div>
+        <div>Wind Speed: ${windSpeed} m/s</div>
+        <div>Wind Direction: ${windDirection}°</div>
+      </div>
     </div>
   `;
 };

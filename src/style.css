@@ -34,18 +34,17 @@ body {
 }
 
 .additional-info {
-  position: absolute;
   background-color: rgba(3, 9, 49, 0.7);
   color: white;
   width: 100%;
-  padding: 1em;
   line-height: 1.5em;
   bottom: 0;
   transform: translateY(100%);
   opacity: 0;
   text-shadow: 1px 1px 10px #333;
   box-shadow: 0px -10px 45px 3px rgba(0, 0, 0, 0.75);
-  transition: 0.2s ease-out;
+  transition: 0.1s ease-out;
+  position: fixed;
   z-index: 1;
 }
 
