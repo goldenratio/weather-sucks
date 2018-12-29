@@ -14,7 +14,7 @@ import { autoUpdate } from './modules/auto-update.js';
 import { initServiceWorkers } from './modules/sw-utils.js';
 import { AdditionalInfo } from './components/additional-info.js';
 
-/** @type {StorageKey} **/
+/** @type {Readonly<StorageKey>} **/
 const storageKey = {
   CITY: 'weather-sucks.city',
   UNIT: 'weather-sucks.unit'

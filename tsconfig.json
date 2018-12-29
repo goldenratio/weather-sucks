@@ -20,18 +20,10 @@
       "es2015.core"
     ],
     "typeRoots": [
-      "node_modules/@types",
-      "./typings"
-    ],
-    "types": [
-
+      "node_modules/@types"
     ]
   },
   "include": [
     "src"
-  ],
-  "exclude": [
-    "node_modules",
-    "src/libs/**/*"
   ]
 }

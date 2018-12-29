@@ -6,7 +6,8 @@
     "typescript": "^3.2.2"
   },
   "scripts": {
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "deploy": "firebase deploy --project weather-scuks --token $FIREBASE_TOKEN"
   },
   "repository": {
     "type": "git",
