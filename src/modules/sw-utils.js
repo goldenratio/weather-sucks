@@ -3,7 +3,7 @@ import { toBoolean } from './utils.js';
 const firstRunKey = 'weather-sucks.first-run';
 
 /**
- * @param {function(): void} newVersionInstalledCallback
+ * @param {Callback} newVersionInstalledCallback
  */
 export function initServiceWorkers(newVersionInstalledCallback) {
   const serviceWorkerSupported = 'serviceWorker' in navigator;
@@ -38,7 +38,7 @@ export function initServiceWorkers(newVersionInstalledCallback) {
 /**
  * https://github.com/GoogleChrome/workbox/issues/1120
  * @param {ServiceWorkerRegistration} registration
- * @param {function() : void} callback
+ * @param {Callback} callback
  */
 function onNewServiceWorker(registration, callback) {
   if (registration.waiting) {

@@ -2,13 +2,13 @@ import { html } from '../libs/preact.js';
 import { getForecastIcon, getBackground } from '../modules/utils.js';
 
 /**
- * @param {object} param
+ * @param {object} props
  * @property {string} city
  */
 export const CityHeader = ({ city }) => html`<div class="city-title">${city}</div>`;
 
 /**
- * @param {object} param
+ * @param {object} props
  * @property {string} value
  * @property {string} unit
  */
@@ -23,7 +23,7 @@ export const Temperature = ({ value, unit }) => {
 };
 
 /**
- * @param {object} param
+ * @param {object} props
  * @property {string} forecast
  */
 export const ForecastInfo = ({ forecast }) => {
@@ -38,7 +38,7 @@ export const ForecastInfo = ({ forecast }) => {
 };
 
 /**
- * @param {object} param
+ * @param {object} props
  * @property {string} forecast
  */
 export const Background = ({ forecast }) => {
@@ -56,7 +56,7 @@ export const Background = ({ forecast }) => {
 };
 
 /**
- * @param {object} param
+ * @param {object} props
  * @property {boolean} value
  * @property {boolean} blur
  */
@@ -66,8 +66,8 @@ export const DoesItSuck = ({ value, blur }) => {
 };
 
 /**
- * @param {object} param
- * @property {function() : void} onClick
+ * @param {object} props
+ * @property {Callback} onClick
  */
 export const SettingsIcon = ({ onClick }) => {
   return html`

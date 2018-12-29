@@ -1,6 +1,6 @@
 /**
- * @param {function() : void} callback
- * @returns {function() : void} unsub
+ * @param {Callback} callback
+ * @returns {DisposeCallback} unsub
  */
 export function autoUpdate(callback) {
   const updateIntervalMs = 600000; // 10 minutes

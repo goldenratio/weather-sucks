@@ -25,3 +25,7 @@
  * @property {string} [city]
  * @property {Unit} [unit]
  */
+
+/**
+ * @typedef {object} AdditionalInfoProps
+ */

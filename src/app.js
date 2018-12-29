@@ -6,12 +6,13 @@ import {
   SettingsIcon,
   ForecastInfo,
   Temperature
-} from './components/weather.component.js';
-import { SettingsPanel } from './components/settings-panel.component.js';
+} from './components/weather.js';
+import { SettingsPanel } from './components/settings-panel.js';
 import { convertKelvinTo } from './modules/utils.js';
 import { fetchWeatherInfo } from './modules/service.js';
 import { autoUpdate } from './modules/auto-update.js';
 import { initServiceWorkers } from './modules/sw-utils.js';
+import { AdditionalInfo } from './components/additional-info.js';
 
 /** @type {StorageKey} **/
 const storageKey = {
@@ -79,6 +80,7 @@ class App extends Component {
           </div>
         </div>
         <${DoesItSuck} value=${doesItSuck} blur=${showSettingsPanel} />
+        <${AdditionalInfo} />
       </div>
     `;
   }

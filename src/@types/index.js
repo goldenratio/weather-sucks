@@ -21,6 +21,18 @@
  */
 
 /**
+ * @typedef {function} Callback
+ * @function
+ * @return {void}
+ */
+
+/**
+ * @typedef {function} DisposeCallback
+ * @function
+ * @return {void}
+ */
+
+/**
  * @typedef {object} AppProps
  */
 
