@@ -5,17 +5,9 @@ before_script:
 - npm install
 - npm install -g firebase-tools
 
-script:
-- npm run typecheck
-
 jobs:
   include:
+    - stage: Typecheck
     - script: npm run typecheck
     - stage: Deploy to Firebase
       script: npm run deploy
-      deploy:
-        provider: releases
-        api_key: $GITHUB_OAUTH_TOKEN
-        skip_cleanup: true
-        on:
-          tags: true
