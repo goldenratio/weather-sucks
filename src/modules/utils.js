@@ -123,7 +123,7 @@ export function convertKelvinTo(kelvin, unit) {
   }
 
   if (unit === 'F') {
-    return Math.round((kelvin - 273.15) * (9/5) + 32);
+    return Math.round((kelvin - 273.15) * (9 / 5) + 32);
   }
 
   throw Error('unknown unit: ' + unit);
@@ -207,6 +207,17 @@ export function toUnit(val) {
 }
 
 /**
+ * https://stackoverflow.com/a/25867068
+ * @param {number} degree
+ * @return {string}
+ */
+export function degreeToCompass(degree) {
+  const val = Math.floor((degree / 22.5) + 0.5);
+  const arr = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+  return arr[(val % 16)];
+}
+
+/**
  * @param {Callback} callback
  * @return {DisposeCallback}
  */
@@ -219,6 +230,7 @@ export function onDocumentClick(callback) {
     document.removeEventListener('click', listener);
   };
 }
+
 /**
  * @return {void}
  */

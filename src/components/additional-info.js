@@ -1,4 +1,5 @@
 import { html } from '../libs/preact.js';
+import { degreeToCompass } from '../modules/utils.js';
 
 /**
  * @param {AdditionalInfoProps} props
@@ -16,7 +17,7 @@ export const AdditionalInfoPanel = ({ show, data }) => {
         <div>Humidity: ${humidity}%</div>
         <div>Pressure: ${pressure} hPa</div>
         <div>Wind Speed: ${windSpeed} m/s</div>
-        <div>Wind Direction: ${windDirection}°</div>
+        <div>Wind Direction: ${windDirection}° (${degreeToCompass(windDirection)})</div>
       </div>
     </div>
   `;
