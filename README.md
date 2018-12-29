@@ -1,4 +1,6 @@
-# weather-sucks
+# Weather Sucks
+[![Build Status](https://travis-ci.org/goldenratio/weather-sucks.svg?branch=master)](https://travis-ci.org/goldenratio/weather-sucks)
+
 Our Earth needs yet another Weather App.
 Demo: https://doesweathersuck.com/
 
