@@ -1,15 +1,12 @@
 language: node_js
 node_js: 7
 
-before_script:
-- npm install -g firebase-tools
-
 jobs:
   include:
     - stage: Typecheck
       script: npm run typecheck
     - stage: Deploy to Firebase
       if: tag = true
-      script: npm run deploy
+      script: npm install -g firebase-tools && npm run deploy
       on:
         tags: true
