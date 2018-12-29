@@ -18,10 +18,11 @@
  * @property {string} [forecast]
  * @property {string} [country]
  * @property {string} [city]
- * @property {number} [humidity]
- * @property {number} [pressure]
+ * @property {number} [humidity] in percent
+ * @property {number} [pressure] mBar
  * @property {number} [windSpeed] m/s
  * @property {number} [windDirection] degrees
+ * @property {number} [visibility] meters
  */
 
 /**
@@ -54,8 +55,9 @@
 
 /**
  * @typedef {object} AdditionalInfo
- * @property {number} humidity
- * @property {number} pressure
- * @property {number} windSpeed
- * @property {number} windDirection
+ * @property {number} humidity in percent
+ * @property {number} pressure mBar
+ * @property {number} windSpeed m/s
+ * @property {number} windDirection in degrees
+ * @property {number} visibility in meters
  */

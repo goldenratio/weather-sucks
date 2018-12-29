@@ -22,7 +22,7 @@ export function fetchWeatherInfo(city) {
         const { /** @type {number|string} **/ cod } = json;
         const code = toInt(cod);
         if (code === 200) {
-          const { main, weather, sys, name, wind } = json;
+          const { main, weather, sys, name, wind, visibility } = json;
           /** @type {WeatherInfo} **/
           const info = {
             temperature: main ? main.temp : undefined,
@@ -33,6 +33,7 @@ export function fetchWeatherInfo(city) {
             pressure: main ? main.pressure : undefined,
             windSpeed: wind ? wind.speed : undefined,
             windDirection: wind ? wind.deg : undefined,
+            visibility
           };
           resolve(info);
         } else {
