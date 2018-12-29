@@ -177,7 +177,6 @@ window.onload = () => {
 
   initServiceWorkers(() => {
     console.log('new version available');
-    window.location.reload();
   });
   render(html`<${App} />`, document.body);
 };
