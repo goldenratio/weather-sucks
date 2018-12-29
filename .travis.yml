@@ -6,7 +6,7 @@ jobs:
     - stage: Typecheck
       script: npm run typecheck
     - stage: Deploy to Firebase
-      if: tag IS present
+      if: tag =~ /^v\d.\d.\d/
       script: npm install -g firebase-tools && npm run deploy
       on:
         tags: true
