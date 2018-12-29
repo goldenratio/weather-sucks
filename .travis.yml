@@ -8,6 +8,6 @@ before_script:
 jobs:
   include:
     - stage: Typecheck
-    - script: npm run typecheck
+      script: npm run typecheck
     - stage: Deploy to Firebase
       script: npm run deploy
