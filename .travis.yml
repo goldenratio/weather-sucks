@@ -11,3 +11,5 @@ jobs:
     - stage: Deploy to Firebase
       if: tag = true
       script: npm run deploy
+      on:
+        tags: true
