@@ -18,6 +18,10 @@
  * @property {string} [forecast]
  * @property {string} [country]
  * @property {string} [city]
+ * @property {number} [humidity]
+ * @property {number} [pressure]
+ * @property {number} [windSpeed]
+ * @property {number} [windDirection]
  */
 
 /**

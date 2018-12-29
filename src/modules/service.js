@@ -22,13 +22,19 @@ export function fetchWeatherInfo(city) {
         const { /** @type {number|string} **/ cod } = json;
         const code = toInt(cod);
         if (code === 200) {
-          const { main, weather, sys, name } = json;
-          resolve(/** @type {WeatherInfo} **/ {
+          const { main, weather, sys, name, wind } = json;
+          /** @type {WeatherInfo} **/
+          const info = {
             temperature: main ? main.temp : undefined,
             forecast: (weather && weather.length > 0) ? weather[0].description : undefined,
             country: sys ? sys.country : undefined,
-            city: name
-          });
+            city: name,
+            humidity: main ? main.humidity : undefined,
+            pressure: main ? main.pressure : undefined,
+            windSpeed: wind ? wind.speed : undefined,
+            windDirection: wind ? wind.deg : undefined,
+          };
+          resolve(info);
         } else {
           throw Error(code.toString());
         }
