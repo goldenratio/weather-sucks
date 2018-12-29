@@ -6,7 +6,6 @@
     "strict": true,
     "noImplicitAny": true,
     "noUnusedLocals": true,
-    "listFiles": true,
     "module": "esnext",
     "moduleResolution": "node",
     "target": "esnext",
