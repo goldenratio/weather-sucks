@@ -8,13 +8,13 @@ import {
   Temperature
 } from './components/weather.js';
 import { SettingsPanel } from './components/settings-panel.js';
-import { convertKelvinTo } from './modules/utils.js';
+import { convertKelvinTo, toUnit, onDocumentClick } from './modules/utils.js';
 import { fetchWeatherInfo } from './modules/service.js';
 import { autoUpdate } from './modules/auto-update.js';
 import { initServiceWorkers } from './modules/sw-utils.js';
-import { AdditionalInfo } from './components/additional-info.js';
+import { AdditionalInfoPanel } from './components/additional-info.js';
 
-/** @type {Readonly<StorageKey>} **/
+/** @type {StorageKey} **/
 const storageKey = {
   CITY: 'weather-sucks.city',
   UNIT: 'weather-sucks.unit'
@@ -28,20 +28,32 @@ class App extends Component {
   componentDidMount() {
     const urlParam = new URLSearchParams(location.search);
     const city = urlParam.get('city') || localStorage.getItem(storageKey.CITY) || 'London';
-    const unit = (urlParam.get('unit') || localStorage.getItem(storageKey.UNIT) || 'C').toUpperCase();
+    const unit = toUnit(urlParam.get('unit') || localStorage.getItem(storageKey.UNIT));
 
-    this.setState({
+    /** @type {AppState} **/
+    const data = {
       city,
       unit,
       temperature: undefined,
       forecast: undefined,
       showSettingsPanel: false,
+      showAdditionalInfo: false,
+      additionalInfo: undefined,
       doesItSuck: false
-    });
+    };
+    this.setState(data);
 
     this.autoUpdateUnsub = autoUpdate(() => {
       this.updateWeather();
     });
+
+    this.additionalInfoUnsub = onDocumentClick(() => {
+      const { showAdditionalInfo } = this.state;
+      this.setState({
+        showAdditionalInfo: !showAdditionalInfo
+      });
+    });
+
     this.updateWeather();
   }
 
@@ -49,19 +61,21 @@ class App extends Component {
     if (this.autoUpdateUnsub) {
       this.autoUpdateUnsub();
     }
+
+    if (this.additionalInfoUnsub) {
+      this.additionalInfoUnsub();
+    }
   }
 
   /**
    * @param {AppProps} prop
    * @param {AppState} state
    */
-  render({}, { showSettingsPanel, city, doesItSuck, temperature, unit, forecast }) {
+  render({}, { showSettingsPanel, showAdditionalInfo, additionalInfo, city, doesItSuck, temperature, unit, forecast }) {
     if (showSettingsPanel === undefined) {
       return html``;
     }
-
     const blurClass = showSettingsPanel ? 'blur' : 'no-blur';
-
     return html`
       <div class="app">
         ${!showSettingsPanel ?
@@ -80,13 +94,16 @@ class App extends Component {
           </div>
         </div>
         <${DoesItSuck} value=${doesItSuck} blur=${showSettingsPanel} />
-        <${AdditionalInfo} />
+        <${AdditionalInfoPanel} show=${showAdditionalInfo} data=${additionalInfo} />
       </div>
     `;
   }
 
   openSettingsPanel() {
-    this.setState({ showSettingsPanel: true });
+    this.setState({
+      showSettingsPanel: true,
+      showAdditionalInfo: false
+    });
   }
 
   closeSettingsPanel() {
@@ -122,12 +139,20 @@ class App extends Component {
     const { city, unit } = this.state;
     fetchWeatherInfo(city)
       .then(/** @type {WeatherInfo} **/data => {
-        const { temperature, forecast, city, country } = data;
+        const { temperature, forecast, city, country, humidity, pressure, windSpeed, windDirection } = data;
+        /** @type {AdditionalInfo} **/
+        const additionalInfo = {
+          humidity,
+          pressure,
+          windSpeed,
+          windDirection
+        };
         this.setState({
           temperature: convertKelvinTo(temperature, unit),
           forecast,
           city: `${city}, ${country}`,
-          doesItSuck: true
+          doesItSuck: true,
+          additionalInfo
         });
       })
       .catch(/** @type {number} **/errCode => {

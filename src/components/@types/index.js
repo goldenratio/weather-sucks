@@ -28,4 +28,6 @@
 
 /**
  * @typedef {object} AdditionalInfoProps
+ * @property {boolean} show
+ * @property {AdditionalInfo} data
  */

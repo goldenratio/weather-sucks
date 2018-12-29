@@ -193,6 +193,33 @@ export function stringContains(str, list) {
 }
 
 /**
+ * @param {string|undefined|null} val
+ * @return {Unit}
+ */
+export function toUnit(val) {
+  if (typeof val === 'string') {
+    const valUpperCase = val.toUpperCase();
+    if (valUpperCase === 'C' || valUpperCase === 'F') {
+      return valUpperCase;
+    }
+  }
+  return 'C';
+}
+
+/**
+ * @param {Callback} callback
+ * @return {DisposeCallback}
+ */
+export function onDocumentClick(callback) {
+  const listener = () => {
+    callback();
+  };
+  document.addEventListener('click', listener);
+  return () => {
+    document.removeEventListener('click', listener);
+  };
+}
+/**
  * @return {void}
  */
 export function noop() {

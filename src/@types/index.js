@@ -20,8 +20,8 @@
  * @property {string} [city]
  * @property {number} [humidity]
  * @property {number} [pressure]
- * @property {number} [windSpeed]
- * @property {number} [windDirection]
+ * @property {number} [windSpeed] m/s
+ * @property {number} [windDirection] degrees
  */
 
 /**
@@ -42,10 +42,20 @@
 
 /**
  * @typedef {object} AppState
- * @property {string} city
- * @property {Unit} unit
- * @property {number} [temperature]
- * @property {string} [forecast]
- * @property {boolean} showSettingsPanel
- * @property {boolean} doesItSuck
+ * @property {string} [city]
+ * @property {Unit} [unit]
+ * @property {number|undefined} [temperature]
+ * @property {string|undefined} [forecast]
+ * @property {boolean} [showSettingsPanel]
+ * @property {boolean} [showAdditionalInfo]
+ * @property {AdditionalInfo|undefined} [additionalInfo]
+ * @property {boolean} [doesItSuck]
+ */
+
+/**
+ * @typedef {object} AdditionalInfo
+ * @property {number} humidity
+ * @property {number} pressure
+ * @property {number} windSpeed
+ * @property {number} windDirection
  */

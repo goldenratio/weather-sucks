@@ -68,7 +68,7 @@ export class SettingsPanel extends Component {
    */
   render({ onCloseClick, onSaveClick }, { city, unit }) {
     return html`
-      <div class="settings-panel" onclick="${() => onCloseClick()}">
+      <div class="settings-panel" onclick="${(/** @type {Event} **/event) => { event.stopPropagation(); onCloseClick()}}">
         <div class="settings-panel-content" onclick="${(/** @type {Event}**/event) => event.stopPropagation()}">
                 
           <div>
