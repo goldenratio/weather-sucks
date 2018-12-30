@@ -1,5 +1,5 @@
 import { html } from '../libs/preact.js';
-import { getForecastIcon, getBackground } from '../modules/utils.js';
+import { getForecastIcon, getBackground, toLocaleString } from '../modules/utils.js';
 
 /**
  * @param {object} props
@@ -9,7 +9,7 @@ export const CityHeader = ({ city }) => html`<div class="city-title">${city}</di
 
 /**
  * @param {object} props
- * @property {string} value
+ * @property {number} value
  * @property {string} unit
  */
 export const Temperature = ({ value, unit }) => {
@@ -17,7 +17,7 @@ export const Temperature = ({ value, unit }) => {
     html`` :
     html`
       <div class="temperature">
-        <div class="weather-digit">${value}<sup><span class="sup">° ${unit}</span></sup></div>
+        <div class="weather-digit">${toLocaleString(value)}<sup><span class="sup">° ${unit}</span></sup></div>
       </div>
   `;
 };

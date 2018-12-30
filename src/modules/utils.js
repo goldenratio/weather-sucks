@@ -218,6 +218,16 @@ export function degreeToCompass(degree) {
 }
 
 /**
+ * @param {number|undefined|null} val
+ * @return {string}
+ */
+export function toLocaleString(val) {
+  if (typeof val === 'number') {
+    return val.toLocaleString();
+  }
+  return ''
+}
+/**
  * @param {Callback} callback
  * @return {DisposeCallback}
  */

@@ -1,5 +1,5 @@
 import { html } from '../libs/preact.js';
-import { degreeToCompass } from '../modules/utils.js';
+import { degreeToCompass, toLocaleString } from '../modules/utils.js';
 
 /**
  * @param {AdditionalInfoProps} props
@@ -14,11 +14,11 @@ export const AdditionalInfoPanel = ({ show, data }) => {
   return html`
     <div class=${`additional-info ${showClass}`}>
       <div style="padding: 1em;">
-        <div>Humidity: ${humidity}%</div>
-        <div>Pressure: ${pressure.toLocaleString()} mBar</div>
-        <div>Wind Speed: ${windSpeed} m/s</div>
-        <div>Wind Direction: ${windDirection}° (${degreeToCompass(windDirection)})</div>
-        <div>Visibility: ${Math.floor(visibility / 1000)} km</div>
+        <div>Humidity: ${toLocaleString(humidity)}%</div>
+        <div>Pressure: ${toLocaleString(pressure)} mBar</div>
+        <div>Wind Speed: ${toLocaleString(windSpeed)} m/s</div>
+        <div>Wind Direction: ${toLocaleString(windDirection)}° (${degreeToCompass(windDirection)})</div>
+        <div>Visibility: ${toLocaleString(visibility / 1000)} km</div>
       </div>
     </div>
   `;
