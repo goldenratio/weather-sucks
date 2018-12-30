@@ -8,7 +8,8 @@ import {
   Temperature
 } from './components/weather.js';
 import { SettingsPanel } from './components/settings-panel.js';
-import { convertKelvinTo, toUnit, onDocumentClick } from './modules/utils.js';
+import { convertKelvinTo, toUnit } from './modules/utils.js';
+import { onPointer } from './modules/input-utils.js';
 import { fetchWeatherInfo } from './modules/service.js';
 import { autoUpdate } from './modules/auto-update.js';
 import { initServiceWorkers } from './modules/sw-utils.js';
@@ -43,28 +44,33 @@ class App extends Component {
     };
     this.setState(data);
 
-    this.autoUpdateUnsub = autoUpdate(() => {
-      this.updateWeather();
-    });
+    /**
+     * @param {boolean} [open]
+     */
+    const toggleAdditionalInfo = (open) => {
+      const { showAdditionalInfo, showSettingsPanel } = this.state;
+      if (showSettingsPanel) {
+        return;
+      }
 
-    this.additionalInfoUnsub = onDocumentClick(() => {
-      const { showAdditionalInfo } = this.state;
-      this.setState({
-        showAdditionalInfo: !showAdditionalInfo
-      });
-    });
+      if (typeof open === 'boolean') {
+        this.setState({ showAdditionalInfo: open });
+      } else {
+        this.setState({ showAdditionalInfo: !showAdditionalInfo });
+      }
+    };
 
+    onPointer(document,
+      toggleAdditionalInfo,
+      () => { toggleAdditionalInfo(true) },
+      () => { toggleAdditionalInfo(false) });
+
+    autoUpdate(() => { this.updateWeather(); });
     this.updateWeather();
   }
 
   componentWillUnmount() {
-    if (this.autoUpdateUnsub) {
-      this.autoUpdateUnsub();
-    }
-
-    if (this.additionalInfoUnsub) {
-      this.additionalInfoUnsub();
-    }
+    // empty
   }
 
   /**

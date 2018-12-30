@@ -227,19 +227,6 @@ export function toLocaleString(val) {
   }
   return ''
 }
-/**
- * @param {Callback} callback
- * @return {DisposeCallback}
- */
-export function onDocumentClick(callback) {
-  const listener = () => {
-    callback();
-  };
-  document.addEventListener('click', listener);
-  return () => {
-    document.removeEventListener('click', listener);
-  };
-}
 
 /**
  * @return {void}

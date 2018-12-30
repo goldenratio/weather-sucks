@@ -12,6 +12,7 @@ body {
   font-size: 16px;
   color: white;
   -webkit-tap-highlight-color: transparent;
+  touch-action: none;
 }
 
 .app {
@@ -35,7 +36,6 @@ body {
 
 .additional-info {
   background-color: rgba(3, 9, 49, 0.7);
-  color: white;
   width: 100%;
   line-height: 1.5em;
   bottom: 0;
