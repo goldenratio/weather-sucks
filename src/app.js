@@ -9,7 +9,6 @@ import {
 } from './components/weather.js';
 import { SettingsPanel } from './components/settings-panel.js';
 import { convertKelvinTo, toUnit } from './modules/utils.js';
-import { onPointer } from './modules/input-utils.js';
 import { fetchWeatherInfo } from './modules/service.js';
 import { autoUpdate } from './modules/auto-update.js';
 import { initServiceWorkers } from './modules/sw-utils.js';
@@ -44,33 +43,8 @@ class App extends Component {
     };
     this.setState(data);
 
-    /**
-     * @param {boolean} [open]
-     */
-    const toggleAdditionalInfo = (open) => {
-      const { showAdditionalInfo, showSettingsPanel } = this.state;
-      if (showSettingsPanel) {
-        return;
-      }
-
-      if (typeof open === 'boolean') {
-        this.setState({ showAdditionalInfo: open });
-      } else {
-        this.setState({ showAdditionalInfo: !showAdditionalInfo });
-      }
-    };
-
-    onPointer(document,
-      toggleAdditionalInfo,
-      () => { toggleAdditionalInfo(true) },
-      () => { toggleAdditionalInfo(false) });
-
     autoUpdate(() => { this.updateWeather(); });
     this.updateWeather();
-  }
-
-  componentWillUnmount() {
-    // empty
   }
 
   /**
@@ -83,7 +57,7 @@ class App extends Component {
     }
     const blurClass = showSettingsPanel ? 'blur' : 'no-blur';
     return html`
-      <div class="app">
+      <div class="app" onClick="${() => {this.toggleAdditionalInfo()}}">
         ${!showSettingsPanel ?
           html`` :
           html`<${SettingsPanel} city="${city}" unit="${unit}" 
@@ -114,6 +88,14 @@ class App extends Component {
 
   closeSettingsPanel() {
     this.setState({ showSettingsPanel: false });
+  }
+
+  toggleAdditionalInfo() {
+    const { showAdditionalInfo, showSettingsPanel } = this.state;
+    if (showSettingsPanel) {
+      return;
+    }
+    this.setState({ showAdditionalInfo: !showAdditionalInfo });
   }
 
   /**
