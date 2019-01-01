@@ -5,7 +5,8 @@ import {
   DoesItSuck,
   SettingsIcon,
   ForecastInfo,
-  Temperature
+  Temperature,
+  LoadingScreen
 } from './components/weather.js';
 import { SettingsPanel } from './components/settings-panel.js';
 import { convertKelvinTo, toUnit } from './modules/utils.js';
@@ -55,6 +56,10 @@ class App extends Component {
     if (showSettingsPanel === undefined) {
       return html``;
     }
+
+    /** @type {boolean} **/
+    const weatherLoaded = typeof temperature !== 'undefined';
+
     const blurClass = showSettingsPanel ? 'blur' : 'no-blur';
     return html`
       <div class="app" onClick="${() => {this.toggleAdditionalInfo()}}">
@@ -63,6 +68,10 @@ class App extends Component {
           html`<${SettingsPanel} city="${city}" unit="${unit}" 
               onCloseClick=${() => this.closeSettingsPanel()} 
               onSaveClick=${(/** @type {string}**/city, /** @type {Unit}**/unit) => this.saveSettings(city, unit)} />`
+        }
+        ${weatherLoaded ?
+          html`` : 
+          html`<${LoadingScreen} />`
         }
         <${Background} forecast="${forecast}" />
         <div class=${`weather-container ${blurClass}`}>
@@ -141,6 +150,7 @@ class App extends Component {
           forecast,
           city: `${city}, ${country}`,
           doesItSuck: true,
+          showSettingsPanel: false,
           additionalInfo
         });
       })

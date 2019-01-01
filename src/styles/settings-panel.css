@@ -1,0 +1,37 @@
+.settings-panel {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  animation: fade-in 0.3s linear;
+  z-index: 2;
+}
+
+.settings-panel-content {
+  background-color: rgba(53, 29, 105, 0.6);
+  box-shadow: 0px 7px 32px -9px rgba(0, 0, 0, 0.7);
+  padding: 2em;
+  width: 100%;
+  position: fixed;
+  animation: settings-panel-slide-down 0.3s ease-out;
+}
+
+.settings-panel-content div {
+  padding-bottom: 1em;
+}
+
+@keyframes settings-panel-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+@keyframes fade-in {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}

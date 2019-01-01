@@ -1,6 +1,15 @@
 import { html } from '../libs/preact.js';
 import { getForecastIcon, getBackground, toLocaleString } from '../modules/utils.js';
 
+
+export const LoadingScreen = () => {
+  return html`
+    <div class="loading-screen">
+      <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+    </div>
+  `;
+};
+
 /**
  * @param {object} props
  * @property {string} city
