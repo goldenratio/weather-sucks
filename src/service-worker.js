@@ -1,7 +1,7 @@
 // @ts-nocheck
 // having issues with ServiceWorker types
 
-const version = '16.0.0'; // version needs to be updated manually for now
+const version = '17.0.0'; // version needs to be updated manually for now
 const projectName = 'weather-sucks';
 const preCacheName = `${projectName}-precache-${version}`;
 const runtimeCacheName = `${projectName}-runtimeCache-${version}`;
@@ -12,7 +12,7 @@ const cacheUrls = [
   './styles/loading-screen.css',
   './styles/settings-panel.css',
   './styles/additional-info.css',
-  './styles/style.css',
+  './styles/app.css',
   './app.js'
 ];
 
