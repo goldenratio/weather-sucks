@@ -53,10 +53,6 @@ class App extends Component {
    * @param {AppState} state
    */
   render({}, { showSettingsPanel, showAdditionalInfo, additionalInfo, city, doesItSuck, temperature, unit, forecast }) {
-    if (showSettingsPanel === undefined) {
-      return html``;
-    }
-
     /** @type {boolean} **/
     const weatherLoaded = typeof temperature !== 'undefined';
 
