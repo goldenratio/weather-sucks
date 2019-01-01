@@ -5,7 +5,9 @@ import { getForecastIcon, getBackground, toLocaleString } from '../modules/utils
 export const LoadingScreen = () => {
   return html`
     <div class="loading-screen">
-      <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+      <div class="loading-icon">
+        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>  
+      </div>
     </div>
   `;
 };

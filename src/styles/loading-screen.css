@@ -1,8 +1,13 @@
 .loading-screen {
   position: absolute;
+  width: 100%;
+  height: 100%;
   z-index: 0;
-  left: 50%;
-  top: 40%;
+}
+
+.loading-icon {
+  text-align: center;
+  margin-top: 10em;
 }
 
 .lds-ring {

@@ -1,6 +1,6 @@
 {
   "name": "weather-sucks",
-  "version": "15.0.0",
+  "version": "16.0.0",
   "description": "Our Earth needs yet another Weather App",
   "devDependencies": {
     "typescript": "^3.2.2"
