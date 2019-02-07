@@ -3,7 +3,7 @@
   "version": "17.0.0",
   "description": "Our Earth needs yet another Weather App",
   "devDependencies": {
-    "typescript": "3.3.1"
+    "typescript": "3.3.3"
   },
   "scripts": {
     "typecheck": "tsc",
