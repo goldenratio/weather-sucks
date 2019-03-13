@@ -31,7 +31,7 @@
       {
         "source": "**/*.@(html|htm|appcache|webapp)",
         "headers": [
-          {"key": "Cache-Control", "value": "max-age=1, private, no-store, no-cache, must-revalidate"}
+          {"key": "Cache-Control", "value": "max-age=1, private, no-store, no-cache, must-revalidate, no-transform"}
         ]
       },
       {
