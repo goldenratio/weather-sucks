@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/goldenratio/weather-sucks.svg?branch=master)](https://travis-ci.org/goldenratio/weather-sucks)
 
 Our Earth needs yet another Weather App.
-Demo: https://doesweathersuck.com/
+Demo: https://weather-sucks.web.app/
 
 Proof of Concept app, to showcase:
 - no transpilers needed to write modern javascript
@@ -12,11 +12,11 @@ Proof of Concept app, to showcase:
 Even in such a small app, maintaining types in JSDoc is cumbersome.
 
 City and Unit param in URL,
-- https://doesweathersuck.com/?city=london
-- https://doesweathersuck.com/?city=vancouver,CA
-- https://doesweathersuck.com/?city=vancouver,US
-- https://doesweathersuck.com/?city=london&unit=F
-- https://doesweathersuck.com/?city=london&unit=C
+- https://weather-sucks.web.app/?city=london
+- https://weather-sucks.web.app/?city=vancouver,CA
+- https://weather-sucks.web.app/?city=vancouver,US
+- https://weather-sucks.web.app/?city=london&unit=F
+- https://weather-sucks.web.app/?city=london&unit=C
 
 App inspiration:
 - http://ootsi.de/
