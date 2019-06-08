@@ -7,7 +7,7 @@
   },
   "scripts": {
     "typecheck": "tsc",
-    "deploy": "firebase deploy --project weather-scuks --token $FIREBASE_TOKEN"
+    "deploy": "firebase deploy --project weather-sucks --token $FIREBASE_TOKEN"
   },
   "repository": {
     "type": "git",
