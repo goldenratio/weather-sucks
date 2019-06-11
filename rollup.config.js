@@ -2,7 +2,7 @@ import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import sourceMaps from 'rollup-plugin-sourcemaps'
 import json from 'rollup-plugin-json'
-import babel from 'rollup-plugin-buble';
+import transpile from 'rollup-plugin-buble';
 
 export const outDir = 'src/legacy';
 
@@ -19,7 +19,7 @@ const plugins = () => {
     // https://github.com/rollup/rollup-plugin-node-resolve#usage
     resolve(),
 
-    babel({
+    transpile({
       transforms: { dangerousTaggedTemplateString: true }
     }),
 
