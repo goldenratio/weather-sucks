@@ -7,7 +7,7 @@ export function autoUpdate(callback) {
   const idleMs = 240000; // 120000 = 2 minutes
   let lastUpdated = Date.now();
 
-  const timerId = setInterval(() => {
+  const timerId = window.setInterval(() => {
     callback();
   }, updateIntervalMs);
 

@@ -11,13 +11,8 @@
     "target": "esnext",
     "baseUrl": ".",
     "lib": [
-      "es5",
-      "es6",
-      "es7",
       "esnext",
-      "dom",
-      "es2015.promise",
-      "es2015.core"
+      "dom"
     ],
     "typeRoots": [
       "node_modules/@types"
@@ -25,5 +20,8 @@
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "src/legacy/**/*"
   ]
 }
