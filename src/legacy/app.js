@@ -481,7 +481,7 @@ function autoUpdate(callback) {
   var idleMs = 240000; // 120000 = 2 minutes
   var lastUpdated = Date.now();
 
-  var timerId = setInterval(function () {
+  var timerId = window.setInterval(function () {
     callback();
   }, updateIntervalMs);
 
