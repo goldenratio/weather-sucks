@@ -633,9 +633,9 @@ var App = /*@__PURE__*/(function (Component) {
   App.prototype.componentDidMount = function componentDidMount () {
     var this$1 = this;
 
-    var urlParam = new URLSearchParams(location.search);
-    var city = urlParam.get('city') || localStorage.getItem(storageKey.CITY) || 'London';
-    var unit = toUnit(urlParam.get('unit') || localStorage.getItem(storageKey.UNIT));
+    var urlParam = typeof URLSearchParams !== 'undefined' ? new URLSearchParams(location.search) : undefined;
+    var city = (urlParam && urlParam.get('city')) || localStorage.getItem(storageKey.CITY) || 'London';
+    var unit = toUnit((urlParam && urlParam.get('unit')) || localStorage.getItem(storageKey.UNIT));
 
     /** @type {AppState} **/
     var data = {
@@ -650,7 +650,9 @@ var App = /*@__PURE__*/(function (Component) {
     };
     this.setState(data);
 
-    autoUpdate(function () { this$1.updateWeather(); });
+    autoUpdate(function () {
+      this$1.updateWeather();
+    });
     this.updateWeather();
   };
 
@@ -673,11 +675,13 @@ var App = /*@__PURE__*/(function (Component) {
     var weatherLoaded = typeof temperature !== 'undefined';
 
     var blurClass = showSettingsPanel ? 'blur' : 'no-blur';
-    return H(templateObject$a, function () {this$1.toggleAdditionalInfo();}, !showSettingsPanel ?
-          H(templateObject$1$2) :
-          H(templateObject$2$1, SettingsPanel, city, unit, function () { return this$1.closeSettingsPanel(); }, function (/** @type {string}**/city, /** @type {Unit}**/unit) { return this$1.saveSettings(city, unit); }), weatherLoaded ?
-          H(templateObject$1$2) : 
-          H(templateObject$3$1, LoadingScreen), Background, forecast, "weather-container " + blurClass, SettingsIcon, function () { return this$1.openSettingsPanel(); }, CityHeader, city, Temperature, temperature, unit, ForecastInfo, forecast, DoesItSuck, doesItSuck, showSettingsPanel, AdditionalInfoPanel, showAdditionalInfo, additionalInfo);
+    return H(templateObject$a, function () {
+      this$1.toggleAdditionalInfo();
+    }, !showSettingsPanel ?
+      H(templateObject$1$2) :
+      H(templateObject$2$1, SettingsPanel, city, unit, function () { return this$1.closeSettingsPanel(); }, function (/** @type {string}**/city, /** @type {Unit}**/unit) { return this$1.saveSettings(city, unit); }), weatherLoaded ?
+      H(templateObject$1$2) :
+      H(templateObject$3$1, LoadingScreen), Background, forecast, "weather-container " + blurClass, SettingsIcon, function () { return this$1.openSettingsPanel(); }, CityHeader, city, Temperature, temperature, unit, ForecastInfo, forecast, DoesItSuck, doesItSuck, showSettingsPanel, AdditionalInfoPanel, showAdditionalInfo, additionalInfo);
   };
 
   App.prototype.openSettingsPanel = function openSettingsPanel () {

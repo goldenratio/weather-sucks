@@ -27,9 +27,9 @@ const storageKey = {
 class App extends Component {
 
   componentDidMount() {
-    const urlParam = new URLSearchParams(location.search);
-    const city = urlParam.get('city') || localStorage.getItem(storageKey.CITY) || 'London';
-    const unit = toUnit(urlParam.get('unit') || localStorage.getItem(storageKey.UNIT));
+    const urlParam = typeof URLSearchParams !== 'undefined' ? new URLSearchParams(location.search) : undefined;
+    const city = (urlParam && urlParam.get('city')) || localStorage.getItem(storageKey.CITY) || 'London';
+    const unit = toUnit((urlParam && urlParam.get('unit')) || localStorage.getItem(storageKey.UNIT));
 
     /** @type {AppState} **/
     const data = {
@@ -44,7 +44,9 @@ class App extends Component {
     };
     this.setState(data);
 
-    autoUpdate(() => { this.updateWeather(); });
+    autoUpdate(() => {
+      this.updateWeather();
+    });
     this.updateWeather();
   }
 
@@ -58,17 +60,19 @@ class App extends Component {
 
     const blurClass = showSettingsPanel ? 'blur' : 'no-blur';
     return html`
-      <div class="app" onClick="${() => {this.toggleAdditionalInfo()}}">
+      <div class="app" onClick="${() => {
+      this.toggleAdditionalInfo()
+    }}">
         ${!showSettingsPanel ?
-          html`` :
-          html`<${SettingsPanel} city="${city}" unit="${unit}" 
+      html`` :
+      html`<${SettingsPanel} city="${city}" unit="${unit}" 
               onCloseClick=${() => this.closeSettingsPanel()} 
               onSaveClick=${(/** @type {string}**/city, /** @type {Unit}**/unit) => this.saveSettings(city, unit)} />`
-        }
+      }
         ${weatherLoaded ?
-          html`` : 
-          html`<${LoadingScreen} />`
-        }
+      html`` :
+      html`<${LoadingScreen} />`
+      }
         <${Background} forecast="${forecast}" />
         <div class=${`weather-container ${blurClass}`}>
           <div style="padding: 1.4em;">
