@@ -1,7 +1,7 @@
 // @ts-nocheck
 // having issues with ServiceWorker types
 
-const version = '23.0.0'; // version needs to be updated manually for now
+const version = '24.0.0'; // version needs to be updated manually for now
 const projectName = 'weather-sucks';
 const preCacheName = `${projectName}-precache-${version}`;
 const runtimeCacheName = `${projectName}-runtimeCache-${version}`;
