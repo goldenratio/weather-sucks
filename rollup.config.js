@@ -29,7 +29,7 @@ const plugins = () => {
 
 export const polyfills = {
   input: 'src/polyfills.js',
-  output: { file: `./${outDir}/polyfills.js`, format: 'cjs', sourcemap: false },
+  output: { file: `./${outDir}/polyfills.js`, format: 'iife', sourcemap: false },
   // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
   external: [],
   plugins: plugins()
