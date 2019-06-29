@@ -618,6 +618,8 @@ var storageKey = {
   UNIT: 'weather-sucks.unit'
 };
 
+var defaultCity = 'Tallinn, EE';
+
 /**
  * @extends {Component<AppProps, AppState>}
  */
@@ -634,7 +636,7 @@ var App = /*@__PURE__*/(function (Component) {
     var this$1 = this;
 
     var urlParam = typeof URLSearchParams !== 'undefined' ? new URLSearchParams(location.search) : undefined;
-    var city = (urlParam && urlParam.get('city')) || localStorage.getItem(storageKey.CITY) || 'London';
+    var city = (urlParam && urlParam.get('city')) || localStorage.getItem(storageKey.CITY) || defaultCity;
     var unit = toUnit((urlParam && urlParam.get('unit')) || localStorage.getItem(storageKey.UNIT));
 
     /** @type {AppState} **/
