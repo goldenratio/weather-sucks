@@ -21,6 +21,8 @@ const storageKey = {
   UNIT: 'weather-sucks.unit'
 };
 
+const defaultCity = 'Tallinn, EE';
+
 /**
  * @extends {Component<AppProps, AppState>}
  */
@@ -28,7 +30,7 @@ class App extends Component {
 
   componentDidMount() {
     const urlParam = typeof URLSearchParams !== 'undefined' ? new URLSearchParams(location.search) : undefined;
-    const city = (urlParam && urlParam.get('city')) || localStorage.getItem(storageKey.CITY) || 'London';
+    const city = (urlParam && urlParam.get('city')) || localStorage.getItem(storageKey.CITY) || defaultCity;
     const unit = toUnit((urlParam && urlParam.get('unit')) || localStorage.getItem(storageKey.UNIT));
 
     /** @type {AppState} **/
