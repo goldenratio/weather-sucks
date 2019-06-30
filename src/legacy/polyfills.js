@@ -199,7 +199,7 @@
 	  return store[key] || (store[key] = value !== undefined ? value : {});
 	})('versions', []).push({
 	  version: '3.1.3',
-	  mode: 'global',
+	  mode:  'global',
 	  copyright: '© 2019 Denis Pushkarev (zloirock.ru)'
 	});
 	});
@@ -1638,7 +1638,7 @@
 	}
 
 	// Forced replacement object prototype accessors methods
-	var forcedObjectPrototypeAccessorsMethods = !fails(function () {
+	var forcedObjectPrototypeAccessorsMethods =  !fails(function () {
 	  var key = Math.random();
 	  // In FF throws only define methods
 	  // eslint-disable-next-line no-undef, no-useless-call
@@ -2483,7 +2483,7 @@
 	if (IteratorPrototype == undefined) { IteratorPrototype = {}; }
 
 	// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-	if (!has(IteratorPrototype, ITERATOR$3)) { hide(IteratorPrototype, ITERATOR$3, returnThis); }
+	if ( !has(IteratorPrototype, ITERATOR$3)) { hide(IteratorPrototype, ITERATOR$3, returnThis); }
 
 	var iteratorsCore = {
 	  IteratorPrototype: IteratorPrototype,
@@ -2542,7 +2542,7 @@
 	  if (anyNativeIterator) {
 	    CurrentIteratorPrototype = objectGetPrototypeOf(anyNativeIterator.call(new Iterable()));
 	    if (IteratorPrototype$2 !== Object.prototype && CurrentIteratorPrototype.next) {
-	      if (objectGetPrototypeOf(CurrentIteratorPrototype) !== IteratorPrototype$2) {
+	      if ( objectGetPrototypeOf(CurrentIteratorPrototype) !== IteratorPrototype$2) {
 	        if (objectSetPrototypeOf) {
 	          objectSetPrototypeOf(CurrentIteratorPrototype, IteratorPrototype$2);
 	        } else if (typeof CurrentIteratorPrototype[ITERATOR$4] != 'function') {
@@ -2561,7 +2561,7 @@
 	  }
 
 	  // define iterator
-	  if (IterablePrototype[ITERATOR$4] !== defaultIterator) {
+	  if ( IterablePrototype[ITERATOR$4] !== defaultIterator) {
 	    hide(IterablePrototype, ITERATOR$4, defaultIterator);
 	  }
 	  iterators[NAME] = defaultIterator;
@@ -3069,11 +3069,11 @@
 	    }
 	    S = String(O);
 	    rx = new RegExp(regexp, 'g');
-	    return rx[MATCH_ALL](S);
+	    return  rx[MATCH_ALL](S);
 	  }
 	});
 
-	MATCH_ALL in RegExpPrototype || hide(RegExpPrototype, MATCH_ALL, $matchAll);
+	 MATCH_ALL in RegExpPrototype || hide(RegExpPrototype, MATCH_ALL, $matchAll);
 
 	// `String.prototype.repeat` method implementation
 	// https://tc39.github.io/ecma262/#sec-string.prototype.repeat
@@ -4964,7 +4964,7 @@
 	  };
 
 	  // wrap fetch result
-	  if (typeof $fetch == 'function') { _export({ global: true, enumerable: true, forced: true }, {
+	  if ( typeof $fetch == 'function') { _export({ global: true, enumerable: true, forced: true }, {
 	    // eslint-disable-next-line no-unused-vars
 	    fetch: function fetch(input) {
 	      return promiseResolve(PromiseConstructor, $fetch.apply(global_1, arguments));
@@ -4992,11 +4992,11 @@
 	  }
 	});
 
-	_export({ target: PROMISE, stat: true, forced: FORCED$e }, {
+	_export({ target: PROMISE, stat: true, forced:  FORCED$e }, {
 	  // `Promise.resolve` method
 	  // https://tc39.github.io/ecma262/#sec-promise.resolve
 	  resolve: function resolve(x) {
-	    return promiseResolve(this, x);
+	    return promiseResolve( this, x);
 	  }
 	});
 
@@ -8839,7 +8839,7 @@
 	  }
 	});
 
-	var getMapIterator = function (it) {
+	var getMapIterator =  function (it) {
 	  // eslint-disable-next-line no-undef
 	  return Map.prototype.entries.call(it);
 	};
@@ -9054,7 +9054,7 @@
 	  }
 	});
 
-	var getSetIterator = function (it) {
+	var getSetIterator =  function (it) {
 	  // eslint-disable-next-line no-undef
 	  return Set.prototype.values.call(it);
 	};
@@ -9935,7 +9935,7 @@
 	  }
 	});
 
-	REPLACE_ALL in RegExpPrototype$3 || hide(RegExpPrototype$3, REPLACE_ALL, $replaceAll);
+	 REPLACE_ALL in RegExpPrototype$3 || hide(RegExpPrototype$3, REPLACE_ALL, $replaceAll);
 
 	// `Symbol.replaceAll` well-known symbol
 	// https://tc39.github.io/proposal-string-replaceall/
