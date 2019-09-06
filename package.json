@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/goldenratio/weather-sucks#readme",
   "devDependencies": {
-    "@babel/core": "7.5.5",
+    "@babel/core": "7.6.0",
     "babel-loader": "8.0.6",
     "babel-plugin-htm": "2.2.0",
     "rollup": "1.20.3",
