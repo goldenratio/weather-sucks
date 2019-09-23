@@ -47,7 +47,7 @@ export function initServiceWorkers(newVersionInstalledCallback) {
 function onNewServiceWorker(registration, callback) {
   if (registration.waiting) {
     // SW is waiting to activate. Can occur if multiple clients open and
-    // one of the clients is refreshed. test 2
+    // one of the clients is refreshed.
     return callback();
   }
 
@@ -64,8 +64,6 @@ function onNewServiceWorker(registration, callback) {
         if (!target) {
           return;
         }
-
-        console.log(event)
 
         // prettier-ignore
         const { state } = /** @type {ServiceWorker} **/ (target);
