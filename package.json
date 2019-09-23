@@ -5,7 +5,7 @@
   "scripts": {
     "typecheck": "tsc",
     "build:legacy": "rollup -c rollup.config.js",
-    "fix-code-style": "prettier -write './src/**/*.js'",
+    "fix-code-style": "prettier --write './src/**/*.js'",
     "deploy": "firebase deploy --token $FIREBASE_TOKEN"
   },
   "repository": {
