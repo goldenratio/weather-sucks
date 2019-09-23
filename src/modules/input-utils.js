@@ -19,7 +19,6 @@ export function onClick(element, callback) {
     callback();
   };
   element.addEventListener('click', listener);
-  element.addEventListener('click', listener)
   return () => {
     element.removeEventListener('click', listener);
   };
