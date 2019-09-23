@@ -60,10 +60,12 @@ function onNewServiceWorker(registration, callback) {
     installing.addEventListener(
       'statechange',
       /** @type {Event} **/ event => {
-        const { target } = event
+        const { target } = event;
         if (!target) {
           return;
         }
+
+        console.log(event)
 
         // prettier-ignore
         const { state } = /** @type {ServiceWorker} **/ (target);
