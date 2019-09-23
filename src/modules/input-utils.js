@@ -36,7 +36,8 @@ export function onPointer(element, clickCallback = noop, swipeUpCallback = noop,
     return onClick(element, clickCallback);
   }
 
-  const onMove = (/** @type {Event} **/event) => {
+  const onMove = (/** @type {Event} **/ event) => {
+    // prettier-ignore
     const pointerEvent = /** @type {PointerEvent}**/ (event);
     const { movementX, movementY } = pointerEvent;
     const list = moveListMap.get(element) || [];

@@ -7,9 +7,8 @@ const ESC = 27;
  * @extends {Component<SettingsPanelProps, SettingsPanelState>}
  */
 export class SettingsPanel extends Component {
-
   componentDidMount() {
-    const { city, unit } = /** @type {SettingsPanelProps} **/(this.props);
+    const { city, unit } = /** @type {SettingsPanelProps} **/ this.props;
     this.setState({
       city,
       unit
@@ -28,11 +27,11 @@ export class SettingsPanel extends Component {
    */
   onKeyUp(event) {
     const { keyCode } = event;
-    const { onCloseClick, onSaveClick } = /** @type {SettingsPanelProps} **/(this.props);
+    const { onCloseClick, onSaveClick } = /** @type {SettingsPanelProps} **/ this.props;
 
     if (keyCode === ESC) {
       onCloseClick();
-    } else if(keyCode === ENTER) {
+    } else if (keyCode === ENTER) {
       const { city, unit } = this.state;
       onSaveClick(city.trim(), unit);
     }
@@ -46,8 +45,9 @@ export class SettingsPanel extends Component {
     if (!target) {
       return;
     }
-    const { value } = /** @type {HTMLInputElement}**/(target);
-    this.setState({ unit: value })
+    // prettier-ignore
+    const { value } = /** @type {HTMLInputElement}**/ (target);
+    this.setState({ unit: value });
   }
 
   /**
@@ -58,7 +58,8 @@ export class SettingsPanel extends Component {
     if (!target) {
       return;
     }
-    const { value } = /** @type {HTMLInputElement}**/(target);
+    // prettier-ignore
+    const { value } = /** @type {HTMLInputElement}**/ (target);
     this.setState({ city: value });
   }
 
@@ -68,18 +69,43 @@ export class SettingsPanel extends Component {
    */
   render({ onCloseClick, onSaveClick }, { city, unit }) {
     return html`
-      <div class="settings-panel" onclick="${(/** @type {Event} **/event) => { event.stopPropagation(); onCloseClick()}}">
-        <div class="settings-panel-content" onclick="${(/** @type {Event}**/event) => event.stopPropagation()}">
-                
+      <div
+        class="settings-panel"
+        onclick="${(/** @type {Event} **/ event) => {
+          event.stopPropagation();
+          onCloseClick();
+        }}"
+      >
+        <div class="settings-panel-content" onclick="${(/** @type {Event}**/ event) => event.stopPropagation()}">
           <div>
-            <input id="c" name="unit" type="radio" value="C" checked=${ unit === 'C' } onchange="${(/** @type {Event}**/e) => this.updateUnit(e)}" />
-            <label for="c" style="padding-right: 1em;">° C</label>   
-            <input id="f" name="unit" type="radio" value="F" checked=${ unit === 'F' } onchange="${(/** @type {Event}**/e) => this.updateUnit(e)}" />
-            <label for="f">° F</label>        
+            <input
+              id="c"
+              name="unit"
+              type="radio"
+              value="C"
+              checked=${unit === 'C'}
+              onchange="${(/** @type {Event}**/ e) => this.updateUnit(e)}"
+            />
+            <label for="c" style="padding-right: 1em;">° C</label>
+            <input
+              id="f"
+              name="unit"
+              type="radio"
+              value="F"
+              checked=${unit === 'F'}
+              onchange="${(/** @type {Event}**/ e) => this.updateUnit(e)}"
+            />
+            <label for="f">° F</label>
           </div>
-          
+
           <div>
-            <input type="text" list="cities" placeholder="City" value="${city}" oninput="${(/** @type {Event}**/e) => this.updateCity(e)}" />
+            <input
+              type="text"
+              list="cities"
+              placeholder="City"
+              value="${city}"
+              oninput="${(/** @type {Event}**/ e) => this.updateCity(e)}"
+            />
             <datalist id="cities">
               <option value="Sukhumi" />
               <option value="Kabul" />
@@ -333,15 +359,12 @@ export class SettingsPanel extends Component {
               <option value="Vancouver, US" />
             </datalist>
           </div>
-          
+
           <div>
             <input type="button" value="Save" onclick="${() => onSaveClick(city.trim(), unit)}" />
           </div>
-        
         </div>
-        
       </div>
     `;
   }
-
 }

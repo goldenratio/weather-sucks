@@ -4,7 +4,8 @@ import { toInt } from './utils.js';
  * @param {string} city
  * @returns {string}
  */
-const weatherApiUrl = city => `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=en&APPID=1589940d6e6075602eefa336163efef3`;
+const weatherApiUrl = city =>
+  `https://api.openweathermap.org/data/2.5/weather?q=${city}&lang=en&APPID=1589940d6e6075602eefa336163efef3`;
 
 /**
  * @param {string} city
@@ -26,7 +27,7 @@ export function fetchWeatherInfo(city) {
           /** @type {WeatherInfo} **/
           const info = {
             temperature: main ? main.temp : undefined,
-            forecast: (weather && weather.length > 0) ? weather[0].description : undefined,
+            forecast: weather && weather.length > 0 ? weather[0].description : undefined,
             country: sys ? sys.country : undefined,
             city: name,
             humidity: main ? main.humidity : undefined,
@@ -45,6 +46,5 @@ export function fetchWeatherInfo(city) {
         const code = toInt(message);
         reject(code);
       });
-
   });
 }

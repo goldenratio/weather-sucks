@@ -10,29 +10,33 @@ export function initServiceWorkers(newVersionInstalledCallback) {
   if (!serviceWorkerSupported) {
     return;
   }
-  const { /** @type {ServiceWorkerContainer} **/serviceWorker } = navigator;
-  serviceWorker.addEventListener('message', /** @type {MessageEvent} **/event => {
-    const { /** @type {string} **/data } = event;
-    switch (data) {
-      case 'new-version-installed':
-        const firstRun = toBoolean(localStorage.getItem(firstRunKey), true);
-        if (firstRun) {
-          localStorage.setItem(firstRunKey, 'false');
-        } else {
-          newVersionInstalledCallback();
-        }
-        break;
+  const { /** @type {ServiceWorkerContainer} **/ serviceWorker } = navigator;
+  serviceWorker.addEventListener(
+    'message',
+    /** @type {MessageEvent} **/ event => {
+      const { /** @type {string} **/ data } = event;
+      switch (data) {
+        case 'new-version-installed':
+          const firstRun = toBoolean(localStorage.getItem(firstRunKey), true);
+          if (firstRun) {
+            localStorage.setItem(firstRunKey, 'false');
+          } else {
+            newVersionInstalledCallback();
+          }
+          break;
+      }
     }
-  });
+  );
 
-  serviceWorker.register('./service-worker.js')
-    .then(/** @type {ServiceWorkerRegistration} **/registration => {
+  serviceWorker.register('./service-worker.js').then(
+    /** @type {ServiceWorkerRegistration} **/ registration => {
       onNewServiceWorker(registration, () => {
         if (registration.waiting) {
           registration.waiting.postMessage('force-activate');
         }
       });
-    });
+    }
+  );
 }
 
 /**
@@ -53,17 +57,22 @@ function onNewServiceWorker(registration, callback) {
       return;
     }
 
-    installing.addEventListener('statechange', /** @type {Event} **/event => {
-      const { target } = event;
-      if (!target) {
-        return;
+    installing.addEventListener(
+      'statechange',
+      /** @type {Event} **/ event => {
+        const { target } = event;
+        if (!target) {
+          return;
+        }
+
+        // prettier-ignore
+        const { state } = /** @type {ServiceWorker} **/ (target);
+        if (state === 'installed') {
+          // A new service worker is available, inform the user
+          callback();
+        }
       }
-      const { state } = /** @type {ServiceWorker} **/(target);
-      if (state === 'installed') {
-        // A new service worker is available, inform the user
-        callback();
-      }
-    });
+    );
   };
 
   if (registration.installing) {
