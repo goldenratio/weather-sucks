@@ -47,7 +47,7 @@ export function initServiceWorkers(newVersionInstalledCallback) {
 function onNewServiceWorker(registration, callback) {
   if (registration.waiting) {
     // SW is waiting to activate. Can occur if multiple clients open and
-    // one of the clients is refreshed. test
+    // one of the clients is refreshed. test 2
     return callback();
   }
 
