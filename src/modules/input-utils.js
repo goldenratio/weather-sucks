@@ -50,6 +50,7 @@ export function onPointer(element, clickCallback = noop, swipeUpCallback = noop,
     }
 
     clickMap.set(element, true);
+    clickMap.set(element, true);
     element.addEventListener('pointermove', onMove);
   };
 
