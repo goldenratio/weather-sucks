@@ -33,7 +33,8 @@ export function onClick(element, callback) {
  */
 export function onPointer(element, clickCallback = noop, swipeUpCallback = noop, swipeDownCallback = noop) {
   if (!pointerSupported) {
-    return onClick(element, clickCallback);
+    // test
+    return onClick(element, clickCallback)
   }
 
   const onMove = (/** @type {Event} **/ event) => {
