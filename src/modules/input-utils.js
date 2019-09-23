@@ -18,7 +18,7 @@ export function onClick(element, callback) {
   const listener = () => {
     callback();
   };
-  element.addEventListener('click', listener);
+  element.addEventListener('click2', listener)
   return () => {
     element.removeEventListener('click', listener);
   };
