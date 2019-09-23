@@ -17,6 +17,7 @@ const pointerSupported = typeof PointerEvent !== 'undefined';
 export function onClick(element, callback) {
   const listener = () => callback();
   element.addEventListener('click', listener);
+  element.addEventListener('click', listener);
   return () => {
     element.removeEventListener('click', listener);
   };
