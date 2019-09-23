@@ -14,8 +14,7 @@ export function initServiceWorkers(newVersionInstalledCallback) {
   serviceWorker.addEventListener(
     'message',
     /** @type {MessageEvent} **/ event => {
-      const { /** @type {string} **/ data }
-      = event;
+      const { /** @type {string} **/ data } = event;
       switch (data) {
         case 'new-version-installed':
           const firstRun = toBoolean(localStorage.getItem(firstRunKey), true);
