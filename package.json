@@ -3,11 +3,11 @@
   "version": "17.0.0",
   "description": "Our Earth needs yet another Weather App",
   "scripts": {
-    "typecheck": "tsc",
+    "typecheck": "tsc && npm run check-code-style",
     "build:legacy": "rollup -c rollup.config.js",
     "fix-code-style": "prettier --write src/**/*.js",
-    "deploy": "firebase deploy --token $FIREBASE_TOKEN",
-    "test-lint-stage": "lint-staged"
+    "check-code-style": "prettier --check src/**/*.js",
+    "deploy": "firebase deploy --token $FIREBASE_TOKEN"
   },
   "repository": {
     "type": "git",
