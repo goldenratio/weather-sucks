@@ -41,17 +41,15 @@
     "url-search-params-polyfill": "7.0.0",
     "whatwg-fetch": "3.0.0"
   },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "linters": {
-      "*.js": [
-        "prettier --write",
-        "git add"
-      ]
     }
   }
 }
