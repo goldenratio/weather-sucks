@@ -43,10 +43,7 @@
     "whatwg-fetch": "3.0.0"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --write src/**/*.js",
-      "git add"
-    ]
+    "*.js": ["prettier --write src/**/*.js", "git add"]
   },
   "husky": {
     "hooks": {
