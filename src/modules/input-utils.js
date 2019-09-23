@@ -15,9 +15,7 @@ const pointerSupported = typeof PointerEvent !== 'undefined';
  * @return {DisposeCallback}
  */
 export function onClick(element, callback) {
-  const listener = () => {
-    callback();
-  };
+  const listener = () => callback();
   element.addEventListener('click', listener);
   return () => {
     element.removeEventListener('click', listener);
