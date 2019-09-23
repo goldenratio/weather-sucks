@@ -43,7 +43,7 @@ export class SettingsPanel extends Component {
   updateUnit(event) {
     const { target } = event;
     if (!target) {
-      return;
+      return
     }
     // prettier-ignore
     const { value } = /** @type {HTMLInputElement}**/ (target);
