@@ -38,7 +38,7 @@
     "typescript": "3.6.4"
   },
   "dependencies": {
-    "core-js": "3.4.8",
+    "core-js": "3.5.0",
     "url-search-params-polyfill": "7.0.1",
     "whatwg-fetch": "3.0.0"
   },
