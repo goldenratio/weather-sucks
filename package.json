@@ -23,7 +23,7 @@
     "@babel/core": "7.9.0",
     "babel-loader": "8.1.0",
     "babel-plugin-htm": "3.0.0",
-    "husky": "4.2.3",
+    "husky": "6.0.0",
     "lint-staged": "10.0.9",
     "prettier": "1.19.1",
     "rollup": "2.1.0",
